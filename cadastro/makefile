@@ -1,8 +1,8 @@
-run: ./main
+run: build
 	@echo Running main
 	@./main
 
-./main: main.c
+build: main.c
 	@gcc ./main.c -o main
 
 clean:

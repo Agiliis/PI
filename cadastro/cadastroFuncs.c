@@ -1,8 +1,6 @@
 #include "cadastroFuncs.h"
 
-user  *retomarUsuarios(user *userPtr, int *nUsuariosAtual){
-    FILE *registroUsuarios;
-
+user *retomarUsuarios(user *userPtr, int *nUsuariosAtual){
     registroUsuarios = fopen("registroUsuarios.txt", "r");
 
     while(fscanf(registroUsuarios, "%s %s %s %s %s", (*userPtr).nome, (*userPtr).telefone, (*userPtr).nascimento, (*userPtr).login, (*userPtr).senha) == 5){
@@ -17,6 +15,8 @@ user  *retomarUsuarios(user *userPtr, int *nUsuariosAtual){
 }
 
 void registrarCadastro(user *userPtr){
+    registroUsuarios = fopen("registroUsuarios.txt", "a");
+
     printf("Informe seu nome: ");
     scanf("%s", (*userPtr).nome);
 
@@ -32,7 +32,11 @@ void registrarCadastro(user *userPtr){
     printf("Cadastre uma senha: ");
     scanf("%s", (*userPtr).senha);
 
+    fprintf(registroUsuarios, "%s %s %s %s %s\n", (*userPtr).nome, (*userPtr).telefone, (*userPtr).nascimento, (*userPtr).login, (*userPtr).senha);
+
     printf("Usuário %s cadastrado com sucesso!\n", (*userPtr).login);
+
+    fclose(registroUsuarios);
 }
 
 void atualizarCadastro(user *userPtr, int nUsuariosAtual){

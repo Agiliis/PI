@@ -23,15 +23,8 @@ typedef struct {
             nascimento[BUFF_SZ];
 } user;
 
+FILE *registroUsuarios;
+
 void registrarCadastro(user *);
 void atualizarCadastro(user *, int);
-
 user *retomarUsuarios(user *, int *);
-
-//void acharLogin(user *userPtr);
-
-// void attNome(user *userPtr);
-// void attTelefone(user *userPtr);
-// void attNascimento(user *userPtr);
-// void attLogin(user *userPtr);
-// void attSenha(user *userPtr);
