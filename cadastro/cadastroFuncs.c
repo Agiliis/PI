@@ -15,8 +15,6 @@ user *retomarUsuarios(user *userPtr, int *nUsuariosAtual){
 }
 
 void registrarCadastro(user *userPtr){
-    registroUsuarios = fopen("registroUsuarios.txt", "a");
-
     printf("Informe seu nome: ");
     scanf("%s", (*userPtr).nome);
 
@@ -32,6 +30,8 @@ void registrarCadastro(user *userPtr){
     printf("Cadastre uma senha: ");
     scanf("%s", (*userPtr).senha);
 
+    registroUsuarios = fopen("registroUsuarios.txt", "a");
+
     fprintf(registroUsuarios, "%s %s %s %s %s\n", (*userPtr).nome, (*userPtr).telefone, (*userPtr).nascimento, (*userPtr).login, (*userPtr).senha);
 
     printf("Usuário %s cadastrado com sucesso!\n", (*userPtr).login);
@@ -40,6 +40,8 @@ void registrarCadastro(user *userPtr){
 }
 
 void atualizarCadastro(user *userPtr, int nUsuariosAtual){
+    user *userPermutPtr = userPtr;
+
     char    loginTentativa[BUFF_SZ],
             senhaTentativa[BUFF_SZ];
 
@@ -125,4 +127,13 @@ void atualizarCadastro(user *userPtr, int nUsuariosAtual){
 
         break;
     }
+
+    registroUsuarios = fopen("registroUsuarios.txt", "w");
+
+    for(int i = 0; i < nUsuariosAtual; i++){
+        fprintf(registroUsuarios, "%s %s %s %s %s\n", (*userPermutPtr).nome, (*userPermutPtr).telefone, (*userPermutPtr).nascimento, (*userPermutPtr).login, (*userPermutPtr).senha);
+        userPermutPtr++;
+    }
+
+    fclose(registroUsuarios);
 }
