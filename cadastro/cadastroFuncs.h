@@ -11,20 +11,21 @@
 #define ATT '2'
 #define STOP '3'
 
-char saudacao1[]    = "Digite: \n[1] para cadastrar um novo usuário \n[2] para atualizar um cadastro \n[3] para finalizar o programa\n";
-char saudacao2[]    = "[1] para atualizar o nome \n[2] para atualizar o telefone \n[3] para atualizar a data de nascimento \n[4] para atualizar o login \n[5] para atualizar a senha \n[6] para deslogar \n";
-char aviso[]        = "Insira uma resposta válida!\n";
+const char *titulo1      = "\nCADASTRO DE USUÁRIOS \n\n";
+const char *titulo2      = "\nATUALIZACAO DE CADASTROS \n\n";
+const char *opcoes1      = "Digite: \n[1] para cadastrar um novo usuário \n[3] para finalizar os cadastros\n";
+const char *opcoes2      = "Digite: \n[2] para atualizar algum cadastro \n[3] para encerrar o programa\n";
+const char *opcoes2_2    = "[1] atualizar o nome \n[2] atualizar o telefone \n[3] atualizar o endereço \n[4] atualizar o login \n[5] atualizar a senha \n[6] para deslogar \n";
+const char *aviso        = "Insira uma resposta válida!\n";
 
 typedef struct {
     char    login[BUFF_SZ],
             senha[BUFF_SZ],
             nome[BUFF_SZ],
+            endereco[BUFF_SZ],
             telefone[BUFF_SZ],
             nascimento[BUFF_SZ];
 } user;
 
-FILE *registroUsuarios;
-
 void registrarCadastro(user *);
 void atualizarCadastro(user *, int);
-user *retomarUsuarios(user *, int *);

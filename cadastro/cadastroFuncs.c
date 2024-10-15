@@ -1,47 +1,28 @@
 #include "cadastroFuncs.h"
 
-user *retomarUsuarios(user *userPtr, int *nUsuariosAtual){
-    registroUsuarios = fopen("registroUsuarios.txt", "r");
-
-    while(fscanf(registroUsuarios, "%s %s %s %s %s", (*userPtr).nome, (*userPtr).telefone, (*userPtr).nascimento, (*userPtr).login, (*userPtr).senha) == 5){
-        dbgs((*userPtr).login)
-        (*nUsuariosAtual)++;
-        userPtr++; 
-    }
-
-    fclose(registroUsuarios);
-
-    return userPtr;
-}
-
 void registrarCadastro(user *userPtr){
+    printf("Cadastre seu login: ");
+    scanf("%s", (*userPtr).login);
+
+    printf("Cadastre sua senha: ");
+    scanf("%s", (*userPtr).senha);
+    
     printf("Informe seu nome: ");
     scanf("%s", (*userPtr).nome);
+
+    printf("Informe seu endereço: ");
+    scanf("%s", (*userPtr).endereco);
 
     printf("Informe seu telefone: ");
     scanf("%s", (*userPtr).telefone);
 
-    printf("Informe sua data de nascimento (formato dd/mm/aaaa): ");
+    printf("Informe sua data de nascimento (formato dd/mm/aaaa) (NÃO PODE SER ALTERADA): ");
     scanf("%s", (*userPtr).nascimento);
 
-    printf("Informe seu login (e-mail): ");
-    scanf("%s", (*userPtr).login);
-
-    printf("Cadastre uma senha: ");
-    scanf("%s", (*userPtr).senha);
-
-    registroUsuarios = fopen("registroUsuarios.txt", "a");
-
-    fprintf(registroUsuarios, "%s %s %s %s %s\n", (*userPtr).nome, (*userPtr).telefone, (*userPtr).nascimento, (*userPtr).login, (*userPtr).senha);
-
     printf("Usuário %s cadastrado com sucesso!\n", (*userPtr).login);
-
-    fclose(registroUsuarios);
 }
 
 void atualizarCadastro(user *userPtr, int nUsuariosAtual){
-    user *userPermutPtr = userPtr;
-
     char    loginTentativa[BUFF_SZ],
             senhaTentativa[BUFF_SZ];
 
@@ -60,17 +41,17 @@ void atualizarCadastro(user *userPtr, int nUsuariosAtual){
     }
 
     printf("Insira sua senha cadastrada: ");
-    scanf("%s", &senhaTentativa);
+    scanf("%s", senhaTentativa);
 
     if(strcmp((*userPtr).senha, senhaTentativa) != 0){
         printf("Senha errada\n");
         return;
     }
 
-    printf("Bem vindo %s! O que deseja atualizar?\n", (*userPtr).nome);
+    printf("Bem vindo %s! O que deseja fazer?\n", (*userPtr).nome);
 
     while(1){   
-        printf("%s", saudacao2);
+        printf(opcoes2_2);
 
         char opcao;
         scanf(" %c", &opcao);
@@ -82,7 +63,7 @@ void atualizarCadastro(user *userPtr, int nUsuariosAtual){
                 strcpy(aux, (*userPtr).nome);
 
                 printf("Digite seu novo nome: ");
-                scanf("%s", &(*userPtr).nome);
+                scanf("%s", (*userPtr).nome);
                 printf("Nome atualizado de %s para %s\n", aux, (*userPtr).nome);
 
                 continue;
@@ -90,23 +71,23 @@ void atualizarCadastro(user *userPtr, int nUsuariosAtual){
                 strcpy(aux, (*userPtr).telefone);
 
                 printf("Digite seu novo telefone: ");
-                scanf("%s", &(*userPtr).telefone);
+                scanf("%s", (*userPtr).telefone);
                 printf("Telefone atualizado de %s para %s\n", aux, (*userPtr).telefone);
 
                 continue;
             case '3':
-                strcpy(aux, (*userPtr).nascimento);
+                strcpy(aux, (*userPtr).endereco);
 
-                printf("Digite sua nova data de nascimento (formato dd/mm/aaaa): ");
-                scanf("%s", &(*userPtr).nascimento);
-                printf("Data de nascimento atualizada de %s para %s\n", aux, (*userPtr).nascimento);
+                printf("Digite seu novo endereço: ");
+                scanf("%s", (*userPtr).endereco);
+                printf("Endereco atualizado de %s para %s\n", aux, (*userPtr).endereco);
 
                 continue;
             case '4':
                 strcpy(aux, (*userPtr).login);
 
-                printf("Digite seu novo login (e-mail): ");
-                scanf("%s", &(*userPtr).login);
+                printf("Digite seu novo login: ");
+                scanf("%s", (*userPtr).login);
                 printf("Login atualizado de %s para %s\n", aux, (*userPtr).login);
                 
                 continue;
@@ -114,26 +95,17 @@ void atualizarCadastro(user *userPtr, int nUsuariosAtual){
                 strcpy(aux, (*userPtr).senha);
 
                 printf("Digite sua nova senha: ");
-                scanf("%s", &(*userPtr).senha);
+                scanf("%s", (*userPtr).senha);
                 printf("Senha atualizada de %s para %s\n", aux, (*userPtr).senha);
                 
                 continue;
             case '6':
                 break;
             default:
-                printf("%s", aviso);
+                printf(aviso);
                 continue;
         }
 
         break;
     }
-
-    registroUsuarios = fopen("registroUsuarios.txt", "w");
-
-    for(int i = 0; i < nUsuariosAtual; i++){
-        fprintf(registroUsuarios, "%s %s %s %s %s\n", (*userPermutPtr).nome, (*userPermutPtr).telefone, (*userPermutPtr).nascimento, (*userPermutPtr).login, (*userPermutPtr).senha);
-        userPermutPtr++;
-    }
-
-    fclose(registroUsuarios);
 }
