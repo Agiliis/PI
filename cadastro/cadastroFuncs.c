@@ -48,7 +48,7 @@ void atualizarCadastro(user *userPtr, int nUsuariosAtual){
     printf("Bem vindo %s! O que deseja atualizar?\n", (*userPtr).nome);
 
     while(1){   
-        printf("[1] para atualizar o nome \n[2] para atualizar o telefone \n[3] para atualizar a data de nascimento \n[4] para atualizar o login \n[5] para atualizar a senha \n[6] para deslogar \n");
+        printf("%s", saudacao2);
 
         char opcao;
         scanf(" %c", &opcao);
