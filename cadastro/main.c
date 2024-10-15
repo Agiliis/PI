@@ -9,6 +9,11 @@ int nUsuariosAtual = 0;
 user *usuariosNewPtr = usuarios; 
 
 int main(){
+    
+    usuariosNewPtr = retomarUsuarios(usuarios, &nUsuariosAtual);
+
+    dbgi(nUsuariosAtual)
+    dbgs((*usuariosNewPtr).login)
 
     while(1){
         printf("%s", saudacao1);
