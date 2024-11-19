@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX_SALAS 45
+#define MAX_SALAS 42
 #define MAX_RESERVAS 100
 
 typedef struct {
     int id;
-    char nome[50];
-    char tipo[20];
-    char bloco[20];
+    char nome[20];
+    char tipo[50];
+    char bloco[50];
 } Sala;
 
 typedef struct {
@@ -23,53 +23,24 @@ int verificar_disponibilidade(Reserva reservas[], int num_reservas, int id_sala,
 void listar_salas_disponiveis(Sala salas[], int num_salas, Reserva reservas[], int num_reservas, char *data, char *horario);
 void escolher_horario(char *horario_escolhido);
 
+FILE *csvFile;
+
 int main() {
-    Sala salas[MAX_SALAS] = {
-        {1, "LIP-04", "LIP", "Bloca A"},
-        {2, "B01", "Sala de Aula", "Bloco B"},
-        {3, "B02", "Sala de Aula", "Bloco B"},
-        {4, "B03", "Sala de Aula", "Bloco B"},
-        {5, "B04", "Sala de Aula", "Bloco B"},
-        {6, "B05", "Sala de Aula", "Bloco B"},
-        {7, "B06", "Sala de Aula", "Bloco B"},
-        {8, "B07", "Sala de Aula", "Bloco B"},
-        {9, "B08", "Sala de Aula", "Bloco B"},
-        {10, "B09", "Sala de Aula", "Bloco B"},
-        {11, "LIP-01", "LIP", "Bloco F"},
-        {12, "LIP-02", "LIP", "Bloco F"},
-        {13, "LIP-07", "LIP", "Bloco G"},
-        {14, "LIP-03", "LIP", "Bloco H"},
-        {15, "LIP-05", "LIP", "Bloco J"},
-        {16, "LIP-06", "LIP", "Bloco J"},
-        {17, "K03", "Sala de Aula", "Bloco K"},
-        {18, "K04", "Sala de Aula", "Bloco K"},
-        {19, "K05", "Sala de Aula", "Bloco K"},
-        {20, "K06", "Sala de Aula", "Bloco K"},
-        {21, "K07", "Sala de Aula", "Bloco K"},
-        {22, "K08", "Sala de Aula", "Bloco K"},
-        {23, "K09", "Sala de Aula", "Bloco K"},
-        {24, "K10", "Sala de Aula", "Bloco K"},
-        {25, "K11", "Sala de Aula", "Bloco K"},
-        {26, "K12", "Sala de Aula", "Bloco K"},
-        {27, "K13", "Sala de Aula", "Bloco K"},
-        {28, "K14", "Sala de Aula", "Bloco K"},
-        {29, "IO3", "Sala de Aula", "Bloco I"},
-        {30, "I04", "Sala de Aula", "Bloco I"},
-        {31, "I05", "Sala de Aula", "Bloco I"},
-        {32, "I06", "Sala de Aula", "Bloco I"},
-        {33, "I07", "Sala de Aula", "Bloco I"},
-        {34, "I08", "Sala de Aula", "Bloco I"},
-        {35, "I09", "Sala de Aula", "Bloco I"},
-        {36, "I10", "Sala de Aula", "Bloco I"},
-        {37, "I11", "Sala de Aula", "Bloco I"},
-        {38, "I12", "Sala de Aula", "Bloco I"},
-        {39, "I13", "Sala de Aula", "Bloco I"},
-        {40, "I14", "Sala de Aula", "Bloco I"},
-        {41, "I15", "Sala de Aula", "Bloco I"}
-    };
+    Sala salas[MAX_SALAS];
+    Reserva reservas[MAX_RESERVAS];
     int num_salas = 41;
-    };
     int num_reservas = 2;
+
+    csvFile = fopen("../res/salas.csv", "r");
+    for(int i = 0; i < MAX_SALAS; i++){
+        Sala aux;
+        aux.id = i+1;
+        
+        fscanf(csvFile, "%s %s %s", aux.nome, aux.tipo, aux.bloco);
+
+        salas[i] = aux;
+    }
+    fclose(csvFile);
 
     char data[11];
     printf("Digite a data (DD-MM-AAAA): ");
@@ -112,14 +83,14 @@ void listar_salas_disponiveis(Sala salas[], int num_salas, Reserva reservas[], i
 }
 
 void escolher_horario(char *horario_escolhido) {
-    printf("Escolha um hor�rio:\n");
+    printf("Escolha um horario:\n");
     for (int i = 0; i < NUM_HORARIOS; i++) {
         printf("%d. %s\n", i + 1, horarios[i]);
     }
 
     int escolha;
     do {
-        printf("Digite o n�mero do hor�rio desejado: ");
+        printf("Digite o numero do horario desejado: ");
         scanf("%d", &escolha);
     } while (escolha < 1 || escolha > NUM_HORARIOS);
 
