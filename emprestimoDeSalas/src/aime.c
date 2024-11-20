@@ -1,8 +1,15 @@
 #include <stdio.h>
 #include <string.h>
+#include "dbg.h"
+
 #define MAX_SALAS 42
 #define MAX_RESERVAS 100
 #define NUM_HORARIOS (sizeof(horarios) / sizeof(horarios[0]))
+
+#define CONS_UP         "\033[A"
+#define CONS_DEL_LINE   "\033[2K"
+#define CONS_CLEAR      "\033[2J"
+#define CONS_RESET      "\033[f"
 
 typedef struct {
     int     id;
@@ -17,6 +24,15 @@ typedef struct {
     char    horario[6];
 } Reserva;
 
+//Ultimo dia de cada mes
+// ------------------------ J   F   M   A   M   J   J   A   S   O   N   D
+const int ultimoDia[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; 
+
+#warning integrar variaveis de data com calendario
+const int   diaAtual = 1,
+            mesAtual = 1,
+            anoAtual = 2024;
+
 Sala salas[MAX_SALAS];
 Reserva reservas[MAX_RESERVAS];
 const char *horarios[] = {"07:10", "08:00", "08:50", "09:40", "10:30", "11:20", "12:10", "13:00", "13:50", "14:40", "15:30", "16:20", "17:10", "18:00", "18:50", "19:40", "20:30", "21:20", "22:10", "23:00"};
@@ -25,30 +41,34 @@ const char *horarios[] = {"07:10", "08:00", "08:50", "09:40", "10:30", "11:20", 
 int num_salas = 41;
 int num_reservas = 2;
 
-FILE *relacaoDasSalas;
-
 int verificar_disponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario);
+int check_data(char data[]);
 void listar_salas_disponiveis(Sala salas[], int num_salas, Reserva reservas[], int num_reservas, char *data, char *horario);
 void escolher_horario(char *horario_escolhido);
+void ler_relacao_das_salas(char *localDoArquivoCsv, Sala *salas);
 
 int main() {
 
-    #warning implementar leitura do csv em funcao
-    relacaoDasSalas = fopen("../res/salas.csv", "r");
-    for(int i = 0; i < MAX_SALAS; i++){
-        Sala aux;
-
-        aux.id = i;
-        fscanf(relacaoDasSalas, "%s %s %s", aux.nome, aux.tipo, aux.bloco);
-
-        salas[i] = aux;
-    }
-    fclose(relacaoDasSalas);
+    ler_relacao_das_salas("../res/salas.csv", salas);
 
     #warning add checagem de input pra data
-    char data[11];
-    printf("Digite a data (DD-MM-AAAA): ");
-    scanf("%s", data);
+    char data[12];
+    int ok = 1;
+    do{
+        if(!ok){
+            printf(CONS_RESET); printf(CONS_CLEAR);
+            printf("Data invalida\n");
+        }
+
+        printf("Digite a data (DD-MM-AAAA): ");
+
+        fgets(data, 12, stdin);
+
+        ok = check_data(data);
+
+    }while(!ok);
+
+    printf(CONS_RESET); printf(CONS_CLEAR);
 
     char horario[6];
     escolher_horario(horario);
@@ -59,6 +79,43 @@ int main() {
     #warning add funcao de reservar salas
 
     return 0;
+}
+
+int check_data(char data[]){
+    int dia, mes, ano;
+    int ok = 1;
+    char *token;
+    
+    token = strtok(data, "-");
+    dia = atoi(token); 
+    
+    token = strtok(NULL, "-");
+    mes = atoi(token); 
+    
+    token = strtok(NULL, "-");
+    ano = atoi(token);
+
+    if( mes < mesAtual || 12 < mes ||
+        dia < diaAtual || ultimoDia[mes] < dia ||
+        ano < anoAtual || anoAtual+1 < ano) ok = 0;
+
+    return ok;
+}
+
+void ler_relacao_das_salas(char *localDoArquivoCsv, Sala *salas){
+    #warning add wrapper de seguranca
+    FILE *relacaoDasSalas = fopen(localDoArquivoCsv, "r");
+
+    for(int i = 0; i < MAX_SALAS; i++){
+        Sala aux;
+
+        aux.id = i;
+        fscanf(relacaoDasSalas, "%s %s %s", aux.nome, aux.tipo, aux.bloco);
+
+        salas[i] = aux;
+    }
+    
+    fclose(relacaoDasSalas);
 }
 
 int verificar_disponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario) {
