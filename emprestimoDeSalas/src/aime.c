@@ -28,6 +28,8 @@ typedef struct {
 // ------------------------ J   F   M   A   M   J   J   A   S   O   N   D
 const int ultimoDia[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; 
 
+const char *horarios[] = {"07:10", "08:00", "08:50", "09:40", "10:30", "11:20", "12:10", "13:00", "13:50", "14:40", "15:30", "16:20", "17:10", "18:00", "18:50", "19:40", "20:30", "21:20", "22:10", "23:00"};
+
 #warning integrar variaveis de data com calendario
 const int   diaAtual = 1,
             mesAtual = 1,
@@ -35,7 +37,6 @@ const int   diaAtual = 1,
 
 Sala salas[MAX_SALAS];
 Reserva reservas[MAX_RESERVAS];
-const char *horarios[] = {"07:10", "08:00", "08:50", "09:40", "10:30", "11:20", "12:10", "13:00", "13:50", "14:40", "15:30", "16:20", "17:10", "18:00", "18:50", "19:40", "20:30", "21:20", "22:10", "23:00"};
 
 #warning pq tem uma variavel e uma definicao ambos com a qtd de salas?
 int num_salas = 41;
@@ -46,14 +47,31 @@ int check_data(char data[]);
 void listar_salas_disponiveis(Sala salas[], int num_salas, Reserva reservas[], int num_reservas, char *data, char *horario);
 void escolher_horario(char *horario_escolhido);
 void ler_relacao_das_salas(char *localDoArquivoCsv, Sala *salas);
+void escolher_data(char data[]);
 
 int main() {
 
     ler_relacao_das_salas("../res/salas.csv", salas);
 
-    #warning add checagem de input pra data
     char data[12];
+    escolher_data(data);
+
+    printf(CONS_RESET); printf(CONS_CLEAR);
+
+    char horario[6];
+    escolher_horario(horario);
+
+    #warning necessario modificar se for seguir com o fluxo de "mostrar primeira sala disponível"
+    listar_salas_disponiveis(salas, num_salas, reservas, num_reservas, data, horario);
+
+    #warning add funcao de reservar salas
+
+    return 0;
+}
+
+void escolher_data(char data[]){
     int ok = 1;
+    
     do{
         if(!ok){
             printf(CONS_RESET); printf(CONS_CLEAR);
@@ -67,18 +85,6 @@ int main() {
         ok = check_data(data);
 
     }while(!ok);
-
-    printf(CONS_RESET); printf(CONS_CLEAR);
-
-    char horario[6];
-    escolher_horario(horario);
-
-    #warning necessario modificar se for seguir com o fluxo de "mostrar primeira sala disponível"
-    listar_salas_disponiveis(salas, num_salas, reservas, num_reservas, data, horario);
-
-    #warning add funcao de reservar salas
-
-    return 0;
 }
 
 int check_data(char data[]){
