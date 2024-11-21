@@ -60,6 +60,16 @@ int main() {
     char horario[6];
     escolher_horario(horario);
 
+    /*
+        ESTRUTURA
+    - Mostra primeira das salas disponíveis
+    - Pergunta se ele quer 
+        - Caso sim: chama funcao de reservar
+        - Caso nao: chama listar_salas_disponiveis
+    - Retorna a tela de confirmacao de sala
+    
+    */
+
     #warning necessario modificar se for seguir com o fluxo de "mostrar primeira sala disponível"
     listar_salas_disponiveis(salas, reservas, num_reservas, data, horario);
 
