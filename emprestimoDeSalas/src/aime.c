@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "dbg.h"
 
@@ -37,20 +38,18 @@ const int   diaAtual = 1,
 
 Sala salas[MAX_SALAS];
 Reserva reservas[MAX_RESERVAS];
-
-#warning pq tem uma variavel e uma definicao ambos com a qtd de salas?
-int num_salas = 41;
-int num_reservas = 2;
+int num_reservas = 0;
 
 int verificar_disponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario);
 int check_data(char data[]);
-void listar_salas_disponiveis(Sala salas[], int num_salas, Reserva reservas[], int num_reservas, char *data, char *horario);
+void listar_salas_disponiveis(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario);
 void escolher_horario(char *horario_escolhido);
 void ler_relacao_das_salas(char *localDoArquivoCsv, Sala *salas);
 void escolher_data(char data[]);
 
 int main() {
 
+    #warning ver caso de ser windows
     ler_relacao_das_salas("../res/salas.csv", salas);
 
     char data[12];
@@ -62,16 +61,24 @@ int main() {
     escolher_horario(horario);
 
     #warning necessario modificar se for seguir com o fluxo de "mostrar primeira sala disponível"
-    listar_salas_disponiveis(salas, num_salas, reservas, num_reservas, data, horario);
+    listar_salas_disponiveis(salas, reservas, num_reservas, data, horario);
 
-    #warning add funcao de reservar salas
+    #warning add funcao de reservar salas (aime ta fazendo)
 
     return 0;
 }
 
+void listar_horarios(){
+    printf("Escolha um horario:\n");
+    for (int i = 0; i < NUM_HORARIOS; i++) {
+        printf("%d.\t%s\n", i + 1, horarios[i]);
+    }
+}
+
 void escolher_data(char data[]){
-    int ok = 1;
-    
+    int ok;
+
+    ok = 1;
     do{
         if(!ok){
             printf(CONS_RESET); printf(CONS_CLEAR);
@@ -136,12 +143,12 @@ int verificar_disponibilidade(Reserva reservas[], int num_reservas, int id_sala,
     return 1;
 }
 
-void listar_salas_disponiveis(Sala salas[], int num_salas, Reserva reservas[], int num_reservas, char *data, char *horario) {
+void listar_salas_disponiveis(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario) {
     int encontrou_disponivel = 0;
     
     printf("Salas disponiveis para a data %s no horario %s:\n", data, horario);
 
-    for (int i = 1; i < num_salas; i++) {
+    for (int i = 1; i < MAX_SALAS; i++) {
         if (verificar_disponibilidade(reservas, num_reservas, salas[i].id, data, horario) == 1) {
             printf("ID: %d\t| Nome: %s\t| Tipo: %s\t| Bloco: %s\n",
                    salas[i].id, salas[i].nome, salas[i].tipo, salas[i].bloco);
@@ -155,19 +162,30 @@ void listar_salas_disponiveis(Sala salas[], int num_salas, Reserva reservas[], i
 }
 
 void escolher_horario(char *horario_escolhido) {
-    int escolha = 1;
+    char escolha[4];
+    int escolhaNum;
+    int ok;
 
-    printf("Escolha um horario:\n");
-    for (int i = 0; i < NUM_HORARIOS; i++) {
-        printf("%d.\t%s\n", i + 1, horarios[i]);
-    }
+    listar_horarios();
 
+    ok = 1;
     do {
-        #warning melhorar aviso
-        if(escolha < 1 || escolha > NUM_HORARIOS) printf("Horário inválido!\n");
-        printf("Digite o numero do horario desejado: ");
-        scanf("%d", &escolha);
-    } while (escolha < 1 || escolha > NUM_HORARIOS);
+        if(!ok){
+            printf(CONS_CLEAR); printf(CONS_RESET);
+            listar_horarios();
+            printf("Opcao invalida! (Digite o numero a esquerda do horario)\n");
+        }
 
-    strcpy(horario_escolhido, horarios[escolha - 1]);
+        printf("Digite o numero do horario desejado: ");
+        
+        fgets(escolha, 4, stdin);
+        //scanf("%d", &escolha);
+
+        escolhaNum = atoi(escolha);
+        ok = (1 <= escolhaNum && escolhaNum <= NUM_HORARIOS);
+    } while (!ok);
+
+    printf(CONS_CLEAR); printf(CONS_RESET);
+
+    strcpy(horario_escolhido, horarios[escolhaNum - 1]);
 }
