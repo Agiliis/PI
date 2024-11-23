@@ -22,7 +22,7 @@ typedef struct {
 
 typedef struct {
     int     id_sala;
-    char    data[11];
+    char    data[12];
     char    horario[6];
 } Reserva;
 
@@ -129,8 +129,12 @@ int check_data(char data[]){
 }
 
 void ler_relacao_das_salas(char *localDoArquivoCsv, Sala *salas){
-    #warning add wrapper de seguranca
     FILE *relacaoDasSalas = fopen(localDoArquivoCsv, "r");
+
+    if(relacaoDasSalas == NULL){
+        puts("Erro ao abrir arquivo com salas");
+        exit(1);
+    }
 
     for(int i = 0; i < MAX_SALAS; i++){
         Sala aux;
