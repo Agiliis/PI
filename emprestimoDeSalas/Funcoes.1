@@ -1,0 +1,35 @@
+//FUNÇÕES DA EXCLUSÃO 
+
+int verificar_indisponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario);
+void listar_salas_indisponiveis(Sala salas[], int num_salas, Reserva reservas[], int num_reservas, char *data, char *horario);
+
+//---------------------------------------------------------------------------------------------
+int verificar_indisponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario) {
+  for (int i = 0; i < num_reservas; i++) {
+      if (reservas[i].id_sala == id_sala &&
+          strcmp(reservas[i].data, data) == 1 &&
+          strcmp(reservas[i].horario, horario) == 1) { // A difereça aqui é que estamos comparando com algo que já existe, por isso ele acha algo 1. Sendo 1, é porque já existe essa reserva.
+          return 0;
+      }
+  }
+
+//---------------------------------------------------------------------------------------------
+
+    void listar_salas_indisponiveis(Sala salas[], int num_salas, Reserva reservas[], int num_reservas, char *data, char *horario) {
+        int encontrou_indisponivel = 0; 
+
+        printf("Salas indisponiveis para a data %s no horario %s:\n", data, horario);
+
+        for (int i = 1; i < num_salas; i++) {
+            if (verificar_indisponibilidade(reservas, num_reservas, salas[i].id, data, horario) == 0) {
+                printf("ID: %d\t| Nome: %s\t| Tipo: %s\t| Bloco: %s\n",
+                       salas[i].id, salas[i].nome, salas[i].tipo, salas[i].bloco);
+                encontrou_indisponivel = 1;
+            }
+        }
+
+        if (!encontrou_indisponivel) {
+            printf("Nenhuma sala reservada nesse horário.\n");
+        }
+    }
+//---------------------------------------------------------------------------------------------
