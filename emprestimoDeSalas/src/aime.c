@@ -38,12 +38,23 @@ Sala salas[MAX_SALAS];
 Reserva reservas[MAX_RESERVAS];
 int num_reservas = 0;
 
+#warning universalizar funcao
+void limpar_tela(){
+    #if DBG == 0
+    printf(CONS_RESET); printf(CONS_CLEAR);
+    #endif
+}
+
 int verificar_disponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario);
 int check_data(char data[]);
 void listar_salas_disponiveis(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario);
 void escolher_horario(char *horario_escolhido);
 void ler_relacao_das_salas(char *localDoArquivoCsv, Sala *salas);
 void escolher_data(char data[]);
+
+#warning otimizar
+void reservar_sala(Reserva reservas[], int *num_reservas, const char *nome_arquivo, int id_sala, char *data, char *horario);
+
 
 int main() {
 
@@ -53,32 +64,71 @@ int main() {
     mesAtual = (*currTime).tm_mon+1;
     anoAtual = (*currTime).tm_year+1900;
 
-    #warning ver caso de ser windows
     ler_relacao_das_salas("../res/salas.csv", salas);
-
-    char data[12];
-    escolher_data(data);
-
-    printf(CONS_RESET); printf(CONS_CLEAR);
-
-    char horario[6];
-    escolher_horario(horario);
 
     /*
         ESTRUTURA
-    - Mostra primeira das salas disponíveis
-    - Pergunta se ele quer 
-        - Caso sim: chama funcao de reservar
-        - Caso nao: chama listar_salas_disponiveis
-    - Retorna a tela de confirmacao de sala
-
+        - Mostra primeira das salas disponíveis
+        - Pergunta se ele quer
+            - Caso sim: chama funcao de reservar
+            - Caso nao: chama listar_salas_disponiveis
+        - Retorna a tela de confirmacao de sala
     */
 
-    listar_salas_disponiveis(salas, reservas, num_reservas, data, horario);
+    char continuar = 'S';
+    while (continuar == 'S' || continuar == 's') {
+        char data[12];
+        escolher_data(data);
 
-    #warning add funcao de reservar salas (aime ta fazendo)
+        char horario[6];
+        escolher_horario(horario);
+
+        listar_salas_disponiveis(salas, reservas, num_reservas, data, horario);
+        
+        #warning realocar bloco pra funcao
+        int id_sala;
+        printf("Digite o ID da sala que deseja reservar: ");
+        scanf("%d", &id_sala);
+        getchar();
+        reservar_sala(reservas, &num_reservas, "reservas.txt", id_sala, data, horario);
+
+        #warning sanitizar leitura
+        printf("Deseja reservar outra sala? (S/N): ");
+        scanf(" %c", &continuar);
+        getchar();
+    }
+
+    printf("Obrigado por usar o sistema de reservas!\n");
 
     return 0;
+}
+
+void reservar_sala(Reserva reservas[], int *num_reservas, const char *nome_arquivo, int id_sala, char *data, char *horario) {
+    if (!verificar_disponibilidade(reservas, *num_reservas, id_sala, data, horario)) {
+        printf("Erro: Sala já reservada para a data %s no horário %s.\n", data, horario);
+        return;
+    }
+
+
+    Reserva nova_reserva = {id_sala, "", ""};
+    strcpy(nova_reserva.data, data);
+    strcpy(nova_reserva.horario, horario);
+
+
+    reservas[*num_reservas] = nova_reserva;
+    (*num_reservas)++;
+
+
+    FILE *arquivo = fopen(nome_arquivo, "a");
+    if (!arquivo) {
+        perror("Erro ao abrir o arquivo de reservas");
+        return;
+    }
+
+    fprintf(arquivo, "%d %s %s\n", id_sala, data, horario);
+    fclose(arquivo);
+
+    printf("Reserva da sala %d realizada com sucesso para a data %s no horário %s.\n", id_sala, data, horario);
 }
 
 void listar_horarios(){
@@ -94,7 +144,7 @@ void escolher_data(char data[]){
     ok = 1;
     do{
         if(!ok){
-            printf(CONS_RESET); printf(CONS_CLEAR);
+            limpar_tela();
             printf("Data invalida\n");
         }
 
@@ -102,28 +152,42 @@ void escolher_data(char data[]){
 
         fgets(data, 12, stdin);
 
+        dbgs(data)
+
         ok = check_data(data);
 
     }while(!ok);
+
+    limpar_tela();
 }
 
 int check_data(char data[]){
     int dia, mes, ano;
     int ok = 1;
     char *token;
-    
-    token = strtok(data, "-");
-    dia = atoi(token); 
-    
-    token = strtok(NULL, "-");
-    mes = atoi(token); 
-    
-    token = strtok(NULL, "-");
-    ano = atoi(token);
 
-    if( mes < mesAtual || 12 < mes ||
-        dia < diaAtual || ultimoDia[mes] < dia ||
-        ano < anoAtual || anoAtual+1 < ano) ok = 0;
+    // token = malloc(12);
+    // strcpy(token, data);
+
+    #warning resolver esse tal de segfault
+
+    token = strtok(data, "-");
+    dia = strtol(token, NULL, 10); 
+    
+    token = strtok(NULL, "-");
+    mes = strtol(token, NULL, 10); 
+    
+    token = strtok(NULL, "-");
+    ano = strtol(token, NULL, 10);
+
+    dbgi(dia) dbgi(mes) dbgi(ano)
+
+    int limInf = 1;
+    if(mes == mesAtual) limInf = diaAtual;
+
+    if(ano != anoAtual) ok = 0;
+    if(mes < mesAtual || 12 < mes) ok = 0;
+    if(dia < limInf || ultimoDia[mes] < dia) ok = 0;
 
     return ok;
 }
@@ -188,7 +252,7 @@ void escolher_horario(char *horario_escolhido) {
     ok = 1;
     do {
         if(!ok){
-            printf(CONS_CLEAR); printf(CONS_RESET);
+            limpar_tela();
             listar_horarios();
             printf("Opcao invalida! (Digite o numero a esquerda do horario)\n");
         }
@@ -202,7 +266,7 @@ void escolher_horario(char *horario_escolhido) {
         ok = (1 <= escolhaNum && escolhaNum <= NUM_HORARIOS);
     } while (!ok);
 
-    printf(CONS_CLEAR); printf(CONS_RESET);
+    limpar_tela();
 
     strcpy(horario_escolhido, horarios[escolhaNum - 1]);
 }
