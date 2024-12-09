@@ -6,7 +6,7 @@
 #include <windows.h>
 #endif
 
-void limpar_tela()[
+void limpar_tela(){
     #if _WIN32
     // Credito: https://cplusplus.com/articles/4z18T05o/
 
@@ -52,5 +52,5 @@ void limpar_tela()[
 
     #endif
 
-]
+}
 

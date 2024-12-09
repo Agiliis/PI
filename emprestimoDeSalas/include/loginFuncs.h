@@ -10,11 +10,13 @@ typedef struct {
 
 void ler_base_de_usuarios(char *pathToArq, User *usrArr, int *userCnt);
 
-User tela_de_login();
-void cadastrar_login();
+// retorna o usuario logado ou 'no_user' se nenhum usuario for logado
+User tela_de_login(User usuarios[], int userCnt);
+
+void cadastrar_login(User *usuarios, int *userCnt);
 
 // funcoes internas
-int check_user(User *user);
+int check_user(User *user, User usuarios[], int userCnt);
 int check_email(char email[]);
 int check_senha(char senha[]);
 //

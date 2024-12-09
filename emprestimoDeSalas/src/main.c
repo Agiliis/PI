@@ -6,10 +6,82 @@
 #include <limparTela.h>
 #include "dbg.h"
 
-void listar_opcoes(char *opcoes[], int numOpcoes){
-    for(int i = 0; i < numOpcoes; i++){
-        printf("%d. %s\n", i+1, opcoes[i]);
+int pedido_em_intervalo(char *opcoes[], int numOpcoes, char *pedido);
+void listar_opcoes(char *opcoes[], int numOpcoes);
+
+int main(){
+
+    User usuario;
+    User usuarios[USER_MAX_NUM];
+    int userCnt = 0;   
+
+    Sala salas[MAX_SALAS];
+    Reserva reservas[MAX_RESERVAS];
+    int num_reservas = 0;
+
+    ler_base_de_usuarios
+    ("../res/userBase.txt", usuarios, &userCnt);
+    
+    ler_relacao_das_salas   
+    ("../res/salas.csv", salas);
+    
+    ler_reservas            
+    ("../res/reservas.csv", reservas, &num_reservas);
+
+    while(1){
+        char *opcoes[] = {"Fazer login", "Cadastrar login", "Sair do programa"};
+        
+        int resposta = pedido_em_intervalo(opcoes, 3, "Digite a opcao");
+
+        switch(resposta){
+        case 1:
+            usuario = tela_de_login(usuarios, userCnt);
+
+            if(strcmp(usuario.email, "no_user") == 0) continue;
+            break;
+        case 2:
+            cadastrar_login(usuarios, &userCnt);
+            
+            continue;
+        case 3:
+            puts("adios");
+            exit(0);
+        }
+
+        // Usuario logado
+
+        while(1){
+            printf("Logado como %s\n\n", usuario.email);
+
+            char *opcoes[] = {"Reservar sala", "Remover reservas", "Sair do usuario"};
+
+            int resposta = pedido_em_intervalo(opcoes, 3, "O que deseja fazer?");  
+
+            switch(resposta){
+            case 1:
+                char data[12];
+                escolher_data(data);
+
+                char horario[6];
+                escolher_horario(horario);
+                
+                reservar_sala(salas, reservas, &num_reservas, "../res/reservas.csv", data, horario);
+
+                continue;
+            case 2:
+                //remover_salas();
+                continue;
+            case 3:
+                break;
+            }  
+
+            // sair do usuario
+            break;
+        }
+
+        limpar_tela();
     }
+
 }
 
 int pedido_em_intervalo(char *opcoes[], int numOpcoes, char *pedido){
@@ -41,57 +113,8 @@ int pedido_em_intervalo(char *opcoes[], int numOpcoes, char *pedido){
     return resposta;
 }
 
-int main(){
-
-    User usuario;
-
-    retomar_usuarios();
-
-    while(1){
-        char *opcoes[] = {"Fazer login", "Cadastrar login", "Sair do programa"};
-        
-        int resposta = pedido_em_intervalo(opcoes, 3, "Digite a opcao");
-
-        switch(resposta){
-        case 1:
-            usuario = tela_de_login();
-
-            if(strcmp(usuario.email, "no_user") == 0) continue;
-            break;
-        case 2:
-            cadastrar_login();
-            
-            continue;
-        case 3:
-            puts("adios");
-            exit(0);
-        }
-
-        // Usuario logado
-
-        while(1){
-            printf("Logado como %s\n\n", usuario.email);
-
-            char *opcoes[] = {"Reservar sala", "Remover reservas", "Sair do usuario"};
-
-            int resposta = pedido_em_intervalo(opcoes, 3, "O que deseja fazer?");  
-
-            switch(resposta){
-            case 1:
-                //reservar_salas();
-                continue;
-            case 2:
-                //remover_salas();
-                continue;
-            case 3:
-                break;
-            }  
-
-            // sair do usuario
-            break;
-        }
-
-        limpar_tela();
+void listar_opcoes(char *opcoes[], int numOpcoes){
+    for(int i = 0; i < numOpcoes; i++){
+        printf("%d. %s\n", i+1, opcoes[i]);
     }
-
 }

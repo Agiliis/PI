@@ -1,9 +1,8 @@
+#include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include <loginFuncs.h>
 #include <limparTela.h>
-
-User usuarios[USER_MAX_NUM];
-int userCnt = 0;
 
 void ler_base_de_usuarios(char *pathToArq, User *usrArr, int *userCnt){
     FILE *userBase = fopen(pathToArq, "r");
@@ -21,7 +20,7 @@ void ler_base_de_usuarios(char *pathToArq, User *usrArr, int *userCnt){
     fclose(userBase);
 }
 
-User tela_de_login(){
+User tela_de_login(User usuarios[], int userCnt){
     char buffer[BUFSIZ];
     int ok;
     User user, no_user = {.email = "no_user"};
@@ -48,7 +47,7 @@ User tela_de_login(){
 
         strcpy(user.email, aux);
 
-        ok = (check_email(user.email) && check_user(&user));
+        ok = (check_email(user.email) && check_user(&user, usuarios, userCnt));
 
     }while(!ok);
 
@@ -88,7 +87,7 @@ User tela_de_login(){
 
 }
 
-void cadastrar_login(){
+void cadastrar_login(User *usuarios, int *userCnt){
     int ok;
     char buffer[BUFSIZ];
     User user;
@@ -97,7 +96,7 @@ void cadastrar_login(){
 
     if(userBase == NULL){
         perror("Erro ao abrir res/userBase.txt");
-        exit(0);
+        exit(1);
     }
 
     ok = 1;
@@ -114,7 +113,7 @@ void cadastrar_login(){
         char *aux = strtok(buffer, "\n");
         strcpy(user.email, aux);
 
-        ok = (check_email(user.email) && !check_user(&user));
+        ok = (check_email(user.email) && !check_user(&user, usuarios, (*userCnt)));
 
     }while(!ok);
 
@@ -140,16 +139,18 @@ void cadastrar_login(){
 
     limpar_tela();
 
+    printf("%s cadastrado com sucesso!\n\n", user.email);
+
     fprintf(userBase, "%s %s\n", user.email, user.senha);
 
-    strcpy(usuarios[userCnt].email, user.email);
-    strcpy(usuarios[userCnt].senha, user.senha);
-    userCnt++;
+    strcpy(usuarios[(*userCnt)].email, user.email);
+    strcpy(usuarios[(*userCnt)].senha, user.senha);
+    (*userCnt)++;
 
     fclose(userBase);
 }
 
-int check_user(User *user){
+int check_user(User *user, User usuarios[], int userCnt){
 
     for(int i = 0; i < userCnt; i++){
         if(strcmp((*user).email, usuarios[i].email) == 0){

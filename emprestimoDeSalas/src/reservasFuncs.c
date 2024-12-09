@@ -14,10 +14,6 @@ const char *horarios[] = {  "07:10", "08:00", "08:50", "09:40", "10:30", "11:20"
                             "13:50", "14:40", "15:30", "16:20", "17:10", "18:00", "18:50", "19:40", 
                             "20:30", "21:20", "22:10", "23:00"};
 
-Sala salas[MAX_SALAS];
-Reserva reservas[MAX_RESERVAS];
-int num_reservas = 0;
-
 /****************************************
 int main() {
 
@@ -78,7 +74,7 @@ void ler_relacao_das_salas(char *pathDoArq, Sala *salas){
     fclose(relacaoDasSalas);
 }
 
-void ler_reservas(char *pathDoArq, Reserva *reservas){
+void ler_reservas(char *pathDoArq, Reserva *reservas, int *num_reservas){
     FILE *relacaoDasReservas = fopen(pathDoArq, "r");
 
     if(relacaoDasReservas == NULL){
@@ -92,8 +88,8 @@ void ler_reservas(char *pathDoArq, Reserva *reservas){
     char id[20];
     while(fscanf(relacaoDasReservas, "%s %s %s", id, aux.data, aux.horario) == 3){
         aux.id_sala = strtol(id, NULL, 10);
-        reservas[num_reservas] = aux;
-        num_reservas++;
+        reservas[(*num_reservas)] = aux;
+        (*num_reservas)++;
     }
     
     fclose(relacaoDasReservas);
@@ -153,11 +149,11 @@ void escolher_horario(char *horario_escolhido) {
     strcpy(horario_escolhido, horarios[escolhaNum - 1]);
 }
 
-void reservar_sala(Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario) {
+void reservar_sala(Sala salas[], Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario) {
     int id_sala;
     int ok;
 
-    listar_salas_disponiveis(salas, reservas, data, horario);
+    listar_salas_disponiveis(salas, reservas, (*num_reservas), data, horario);
 
     ok = 1;
     do{
@@ -165,7 +161,7 @@ void reservar_sala(Reserva reservas[], int *num_reservas, const char *nome_arqui
 
         if(!ok){
             limpar_tela();
-            listar_salas_disponiveis(salas, reservas, data, horario);
+            listar_salas_disponiveis(salas, reservas, (*num_reservas), data, horario);
             puts("Opcao invalida!");
         }
 
@@ -176,7 +172,7 @@ void reservar_sala(Reserva reservas[], int *num_reservas, const char *nome_arqui
         char *aux = strtok(buffer, "\n");
         id_sala = strtol(buffer, NULL, 10);
 
-        ok = id_sala != 0 && verificar_disponibilidade(reservas, id_sala, data, horario);
+        ok = id_sala != 0 && check_disponibilidade(reservas, (*num_reservas), id_sala, data, horario);
     }while(!ok);
 
     limpar_tela();
@@ -211,13 +207,13 @@ void listar_horarios(){
     }
 }
 
-void listar_salas_disponiveis(Sala salas[], Reserva reservas[], char *data, char *horario) {
+void listar_salas_disponiveis(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario) {
     int encontrou_disponivel = 0;
     
     printf("Salas disponiveis para a data %s no horario %s:\n", data, horario);
 
     for (int i = 1; i < MAX_SALAS; i++) {
-        if (verificar_disponibilidade(reservas, salas[i].id, data, horario) == 1) {
+        if (check_disponibilidade(reservas, num_reservas, salas[i].id, data, horario) == 1) {
             printf("ID: %d\t| Nome: %s\t| Tipo: %s\t| Bloco: %s\n",
                    salas[i].id, salas[i].nome, salas[i].tipo, salas[i].bloco);
             encontrou_disponivel = 1;
@@ -268,7 +264,7 @@ int check_data(char data[]){
     return ok;
 }
 
-int check_disponibilidade(Reserva reservas[], int id_sala, char *data, char *horario) {
+int check_disponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario) {
     // dbgi(num_reservas)
     // dbgi(id_sala)
     

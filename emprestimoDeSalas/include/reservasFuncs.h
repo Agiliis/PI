@@ -22,21 +22,19 @@ typedef struct {
 
 
 void ler_relacao_das_salas(char *pathDoArq, Sala *salas);
-void ler_reservas(char *pathDoArq, Reserva *reservas);
+void ler_reservas(char *pathDoArq, Reserva *reservas, int *num_reservas);
 
 void escolher_data(char data[]);
 void escolher_horario(char *horario_escolhido);
 
-void reservar_sala(Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario);
+void reservar_sala(Sala salas[], Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario);
 
 // funcoes internas de outras funcoes
-void limpar_tela();
-
 void listar_horarios();
-void listar_salas_disponiveis(Sala salas[], Reserva reservas[], char *data, char *horario);
+void listar_salas_disponiveis(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario);
 
 int check_data(char data[]);
-int check_disponibilidade(Reserva reservas[], int id_sala, char *data, char *horario);
+int check_disponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario);
 //
 
 
