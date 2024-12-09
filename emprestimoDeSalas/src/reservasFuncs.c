@@ -149,11 +149,11 @@ void escolher_horario(char *horario_escolhido) {
     strcpy(horario_escolhido, horarios[escolhaNum - 1]);
 }
 
-void reservar_sala(Sala salas[], Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario) {
+void criar_reserva(Sala salas[], Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario) {
     int id_sala;
     int ok;
 
-    listar_salas_disponiveis(salas, reservas, (*num_reservas), data, horario);
+    listar_salas(salas, reservas, (*num_reservas), data, horario, "disponivel");
 
     ok = 1;
     do{
@@ -161,7 +161,7 @@ void reservar_sala(Sala salas[], Reserva reservas[], int *num_reservas, const ch
 
         if(!ok){
             limpar_tela();
-            listar_salas_disponiveis(salas, reservas, (*num_reservas), data, horario);
+            listar_salas(salas, reservas, (*num_reservas), data, horario, "disponivel");
             puts("Opcao invalida!");
         }
 
@@ -172,7 +172,7 @@ void reservar_sala(Sala salas[], Reserva reservas[], int *num_reservas, const ch
         char *aux = strtok(buffer, "\n");
         id_sala = strtol(buffer, NULL, 10);
 
-        ok = id_sala != 0 && check_disponibilidade(reservas, (*num_reservas), id_sala, data, horario);
+        ok = id_sala != 0 && check_disponibilidade(reservas, (*num_reservas), id_sala, data, horario) == 1;
     }while(!ok);
 
     limpar_tela();
@@ -207,21 +207,29 @@ void listar_horarios(){
     }
 }
 
-void listar_salas_disponiveis(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario) {
-    int encontrou_disponivel = 0;
-    
-    printf("Salas disponiveis para a data %s no horario %s:\n", data, horario);
+void listar_salas(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario, const char *modo) {
+    int encontrou = 0;
+    int modoCheck;
+
+    if      (strcmp(modo, "disponivel")     == 0) modoCheck = 1;
+    else if (strcmp(modo, "indisponivel")   == 0) modoCheck = 0;
+    else{
+        perror("Argumento para 'modo' invalido");
+        exit(1);
+    }
+
+    printf("Salas %s\bis para a data %s no horario %s:\n", modo, data, horario);
 
     for (int i = 1; i < MAX_SALAS; i++) {
-        if (check_disponibilidade(reservas, num_reservas, salas[i].id, data, horario) == 1) {
+        if (check_disponibilidade(reservas, num_reservas, salas[i].id, data, horario) == modoCheck) {
             printf("ID: %d\t| Nome: %s\t| Tipo: %s\t| Bloco: %s\n",
                    salas[i].id, salas[i].nome, salas[i].tipo, salas[i].bloco);
-            encontrou_disponivel = 1;
+            encontrou = 1;
         }
     }
 
-    if (!encontrou_disponivel) {
-        printf("Nenhuma sala disponivel para o horario solicitado.\n");
+    if (!encontrou) {
+        printf("Nenhuma sala %s para o horario solicitado.\n", modo);
     }
 }
 

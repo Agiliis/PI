@@ -1,7 +1,7 @@
 #ifndef DBG_H
 #define DBG_H
 
-#define DBG 0
+//#define DBG 0
 
 #if DBG == 1
 #warning DBG MODE ON
