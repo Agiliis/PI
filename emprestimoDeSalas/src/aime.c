@@ -7,6 +7,9 @@
 #include <stdbool.h>
 
 
+GtkBuilder *builder;
+GtkWidget *window;
+GtkStack *stack
 
 #define CONS_UP         "\033[A"
 #define CONS_DEL_LINE   "\033[2K"
@@ -103,77 +106,94 @@ void reservar_sala(Reserva reservas[], int *num_reservas, const char *nome_arqui
 
 //funções gtk
 
-void on_login_button_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+void on_view_cancelar_reserva_destroy(GtkWidget *widget, gpointer data){
+    gtk_main_quit() //função de destroy da main window, nao consegui trocar o id no glade por algum motivo
 }
 
+void on_login_button_clicked(GtkWidget *widget, gpointer data){
+    gtk_main_quit() // passar função de login
+    gtk_stack_set_visible_child_name(stack, "page0"); 
+}
+
+void on_button_novo_usu_clicked(GtkWidget *widget, gpointer data){
+    gtk_stack_set_visible_child_name(stack, "view_inicial"); 
+}
 void on_lembrar_usu_toggled(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    gtk_main_quit() // talvez nao precise
 }
 
 void on_cadastro_button_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    //passar função referente a cadastro
+    gtk_stack_set_visible_child_name(stack, "page2"); 
 }
 
 void on_exit_button_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    gtk_main_quit() 
 }
 
 void on_button_voltar_cad_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    gtk_stack_set_visible_child_name(stack, "view_inicial"); 
 }
 
 void on_button_cadastar_cad_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    gtk_stack_set_visible_child_name(stack, "view_login");
 }
 
 void on_button_reserva_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    // passar função referente ao cadastro
+    gtk_stack_set_visible_child_name(stack, "page3"); 
 }
 
 void on_cancelar_reserva_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    //passar função referente a listagem 
+    gtk_stack_set_visible_child_name(stack, "page1"); 
 }
 
 void on_localizar_reserva_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    //passar função que sugere horários
+    gtk_stack_set_visible_child_name(stack, "page4");
 }
 
 void on_voltar_reserva_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    gtk_stack_set_visible_child_name(stack, "page0");
 }
 
 void on_button_confirmar_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    //passar função de reserva
+    gtk_stack_set_visible_child_name(stack, "page0"); 
 }
 
 void on_button_volta_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    gtk_stack_set_visible_child_name("page3"); 
 }
 
 void on_confirmar_reserva_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    gtk_stack_set_visible_child_name(stack, "page0"); 
 }
 
 void on_excluir_reserva_clicked(GtkWidget *widget, gpointer data){
-    gtk_main_quit()
+    //passar função que deleta a reserva
+    gtk_main_quit() //tirar
+    gtk_stack_set_visible_child_name(stack, "page0"); 
 }
 
 
 
-int main() {
+int main(int argc, char *argv[]) {
 
     ler_relacao_das_salas("../res/salas.csv", salas);
     ler_reservas("../res/reservas.csv", reservas);
 
     // inicialização biblioteca gtk
     gtk_init(&argc, &argv);
-    builder = gtk_builder_new_from_file("hemir.ui");
+    builder = gtk_builder_new_from_file("#hemir.ui#");
 
     // adição callbacks
 
     gtk_builder_add_calback_symbols(builder,
+    "on_view_cancelar_reserva_destroy", G_CALLBACK(on_view_cancelar_reserva_destroy),
     "on_login_button_clicked",          G_CALLBACK(on_login_button_clicked),
+    "on_button_novo_usu_clicked",       G_CALLBACK(on_button_novo_usu_clicked),
     "on_lembrar_usu_toggled",           G_CALLBACK(on_lembrar_usu_toggled),
     "on_cadastro_button_clicked",       G_CALLBACK(on_cadastro_button_clicked),
     "on_exit_button_clicked",           G_CALLBACK(on_exit_button_clicked),
@@ -191,6 +211,7 @@ int main() {
     gtk_builder_connect_signals(builder, NULL);
     
     window = GTK_WIDGET(gtk_builder_get_object(builder, "main_window"));
+    stack = GTK_STACK(gtk_builder_get_object(builder, "stack"));
 
     gtk_widget_show_all(window);
     gtk_main();
