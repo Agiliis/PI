@@ -87,15 +87,15 @@ User tela_de_login(User usuarios[], int userCnt){
 
 }
 
-void cadastrar_login(User *usuarios, int *userCnt){
+void cadastrar_login(char *pathToUserBase, User *usuarios, int *userCnt){
     int ok;
     char buffer[BUFSIZ];
     User user;
 
-    FILE *userBase = fopen("../res/userBase.txt", "a");
+    FILE *userBase = fopen(pathToUserBase, "a");
 
     if(userBase == NULL){
-        perror("Erro ao abrir res/userBase.txt");
+        perror("Erro ao abrir userBase.txt");
         exit(1);
     }
 

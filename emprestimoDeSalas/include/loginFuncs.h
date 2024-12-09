@@ -13,7 +13,7 @@ void ler_base_de_usuarios(char *pathToArq, User *usrArr, int *userCnt);
 // retorna o usuario logado ou 'no_user' se nenhum usuario for logado
 User tela_de_login(User usuarios[], int userCnt);
 
-void cadastrar_login(User *usuarios, int *userCnt);
+void cadastrar_login(char *pathToUserBase, User *usuarios, int *userCnt);
 
 // funcoes internas
 int check_user(User *user, User usuarios[], int userCnt);

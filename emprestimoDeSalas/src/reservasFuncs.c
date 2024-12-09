@@ -165,7 +165,7 @@ void criar_reserva(Sala salas[], Reserva reservas[], int *num_reservas, const ch
         return;
     }
 
-    fprintf(arquivo, "\n%d %s %s", id_sala, data, horario);
+    fprintf(arquivo, "%d %s %s\n", id_sala, data, horario);
     fclose(arquivo);
 
     printf("Reserva da sala %d realizada com sucesso para a data %s no horário %s.\n", id_sala, data, horario);

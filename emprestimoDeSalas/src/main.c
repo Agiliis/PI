@@ -6,6 +6,10 @@
 #include <limparTela.h>
 #include "dbg.h"
 
+char    *pth_userBase   = "../res/userBase.txt",
+        *pth_salas      = "../res/salas.csv",
+        *pth_reservas   = "../res/reservas.csv";
+
 int pedido_em_intervalo(char *opcoes[], int numOpcoes, char *pedido);
 void listar_opcoes(char *opcoes[], int numOpcoes);
 
@@ -23,13 +27,13 @@ int main(){
     char horario[6];
 
     ler_base_de_usuarios
-    ("../res/userBase.txt", usuarios, &userCnt);
+    (pth_userBase, usuarios, &userCnt);
     
     ler_relacao_das_salas   
-    ("../res/salas.csv", salas);
+    (pth_salas, salas);
     
     ler_reservas            
-    ("../res/reservas.csv", reservas, &num_reservas);
+    (pth_reservas, reservas, &num_reservas);
 
     while(1){
         char *opcoes[] = {"Fazer login", "Cadastrar login", "Sair do programa"};
@@ -43,7 +47,7 @@ int main(){
             if(strcmp(usuario.email, "no_user") == 0) continue;
             break;
         case 2:
-            cadastrar_login(usuarios, &userCnt);
+            cadastrar_login(pth_userBase, usuarios, &userCnt);
             
             continue;
         case 3:
