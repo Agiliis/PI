@@ -91,6 +91,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
                 <property name="draw-indicator">True</property>
+                <signal name="toggled" handler="on_lembrar_usu_toggled" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -109,6 +110,7 @@
                 <property name="margin-right">5</property>
                 <property name="margin-top">5</property>
                 <property name="margin-bottom">5</property>
+                <signal name="clicked" handler="on_login_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -164,6 +166,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <signal name="clicked" handler="on_cadastro_button_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -179,6 +182,7 @@
                     <property name="receives-default">True</property>
                     <property name="use-stock">True</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_exit_button_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -283,6 +287,7 @@
                     <property name="receives-default">True</property>
                     <property name="use-stock">True</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_button_voltar_cad_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -296,6 +301,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <signal name="clicked" handler="on_button_cadastar_cad_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -493,6 +499,7 @@
                     <property name="receives-default">True</property>
                     <property name="use-stock">True</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_localizar_reserva_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -508,6 +515,7 @@
                     <property name="receives-default">True</property>
                     <property name="use-stock">True</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_voltar_reserva_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -662,6 +670,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <signal name="clicked" handler="on_confirmar_reserva_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
