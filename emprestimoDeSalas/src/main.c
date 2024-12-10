@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <loginFuncs.h>
-#include <reservasFuncs.h>
-#include <limparTela.h>
+#include <loginFuncs/loginFuncs.h>
+#include <reservasFuncs/reservasFuncs.h>
+#include <limparTela/limparTela.h>
 #include "dbg.h"
 
-char    *pth_userBase   = "res/userBase.txt",
-        *pth_salas      = "res/salas.csv",
-        *pth_reservas   = "res/reservas.csv";
+char    *pth_userBase   = "../res/userBase.txt",
+        *pth_salas      = "../res/salas.csv",
+        *pth_reservas   = "../res/reservas.csv";
 
 int pedido_em_intervalo(char *opcoes[], int numOpcoes, char *pedido);
 void listar_opcoes(char *opcoes[], int numOpcoes);

@@ -1,0 +1,119 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.31"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "include",
+					"jsonFile" : "directory-include-Debug-7ead17b99bffc88b66bb.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.31"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "include",
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3
+					]
+				},
+				{
+					"build" : "src",
+					"jsonFile" : "directory-src-Debug-b6cf2213fc5053b67c22.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.31"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "src",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2
+					],
+					"name" : "EmprestimoDeSalas",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "EmprestimoDeSalas::@145eef247bfb46b6828c",
+					"jsonFile" : "target-EmprestimoDeSalas-Debug-ea00ca27dc26e44135bf.json",
+					"name" : "EmprestimoDeSalas",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "limparTela::@14b3099d61bfdbeae804",
+					"jsonFile" : "target-limparTela-Debug-b68031fc41422ab80b3d.json",
+					"name" : "limparTela",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "loginFuncs::@14b3099d61bfdbeae804",
+					"jsonFile" : "target-loginFuncs-Debug-d75a2a915245d789218c.json",
+					"name" : "loginFuncs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "reservasFuncs::@14b3099d61bfdbeae804",
+					"jsonFile" : "target-reservasFuncs-Debug-930b6cec26429e17b909.json",
+					"name" : "reservasFuncs",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/agil/dev/Facool/PI/build",
+		"source" : "/home/agil/dev/Facool/PI/emprestimoDeSalas"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
