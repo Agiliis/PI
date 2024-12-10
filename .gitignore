@@ -1,7 +1,7 @@
 .vscode/
 tsts/
 
-# Comentar as pastas que não serao trabalhadas no momento
-cadastro/
+# Comentar as pastas que serao trabalhadas no momento
+# cadastro/
 emprestimoDeSalas/
 # atividades2/
