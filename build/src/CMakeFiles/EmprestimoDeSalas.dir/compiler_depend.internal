@@ -6,6 +6,7 @@ src/CMakeFiles/EmprestimoDeSalas.dir/mainGUI.c.o
  /home/agil/dev/Facool/PI/emprestimoDeSalas/include/limparTela/limparTela.h
  /home/agil/dev/Facool/PI/emprestimoDeSalas/include/loginFuncs/loginFuncs.h
  /home/agil/dev/Facool/PI/emprestimoDeSalas/include/reservasFuncs/reservasFuncs.h
+ /home/agil/dev/Facool/PI/emprestimoDeSalas/src/dbg.h
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
  /usr/include/asm-generic/errno.h

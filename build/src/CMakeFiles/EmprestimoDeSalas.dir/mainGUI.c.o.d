@@ -728,4 +728,5 @@ src/CMakeFiles/EmprestimoDeSalas.dir/mainGUI.c.o: \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
  /home/agil/dev/Facool/PI/emprestimoDeSalas/include/limparTela/limparTela.h \
  /home/agil/dev/Facool/PI/emprestimoDeSalas/include/loginFuncs/loginFuncs.h \
- /home/agil/dev/Facool/PI/emprestimoDeSalas/include/reservasFuncs/reservasFuncs.h
+ /home/agil/dev/Facool/PI/emprestimoDeSalas/include/reservasFuncs/reservasFuncs.h \
+ /home/agil/dev/Facool/PI/emprestimoDeSalas/src/dbg.h

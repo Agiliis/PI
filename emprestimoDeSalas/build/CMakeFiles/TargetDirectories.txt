@@ -1,0 +1,10 @@
+/home/agil/dev/Facool/PI/emprestimoDeSalas/build/CMakeFiles/edit_cache.dir
+/home/agil/dev/Facool/PI/emprestimoDeSalas/build/CMakeFiles/rebuild_cache.dir
+/home/agil/dev/Facool/PI/emprestimoDeSalas/build/include/CMakeFiles/limparTela.dir
+/home/agil/dev/Facool/PI/emprestimoDeSalas/build/include/CMakeFiles/loginFuncs.dir
+/home/agil/dev/Facool/PI/emprestimoDeSalas/build/include/CMakeFiles/reservasFuncs.dir
+/home/agil/dev/Facool/PI/emprestimoDeSalas/build/include/CMakeFiles/edit_cache.dir
+/home/agil/dev/Facool/PI/emprestimoDeSalas/build/include/CMakeFiles/rebuild_cache.dir
+/home/agil/dev/Facool/PI/emprestimoDeSalas/build/src/CMakeFiles/EmprestimoDeSalas.dir
+/home/agil/dev/Facool/PI/emprestimoDeSalas/build/src/CMakeFiles/edit_cache.dir
+/home/agil/dev/Facool/PI/emprestimoDeSalas/build/src/CMakeFiles/rebuild_cache.dir

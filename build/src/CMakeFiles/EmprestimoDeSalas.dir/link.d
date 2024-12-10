@@ -42,6 +42,7 @@ EmprestimoDeSalas: \
   /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o \
   /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libgdk-3.so \
   /lib/x86_64-linux-gnu/libgmodule-2.0.so.0 \
+  /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libglib-2.0.so \
   /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libgio-2.0.so \
   /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libpangocairo-1.0.so \
   /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libpango-1.0.so \
@@ -60,7 +61,6 @@ EmprestimoDeSalas: \
   /lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0 \
   /lib/x86_64-linux-gnu/libXfixes.so.3 \
   /lib/x86_64-linux-gnu/libffi.so.8 \
-  /lib/x86_64-linux-gnu/libpcre2-8.so.0 \
   /lib64/ld-linux-x86-64.so.2 \
   /lib/x86_64-linux-gnu/libxkbcommon.so.0 \
   /lib/x86_64-linux-gnu/libwayland-client.so.0 \
@@ -72,6 +72,7 @@ EmprestimoDeSalas: \
   /lib/x86_64-linux-gnu/libXcomposite.so.1 \
   /lib/x86_64-linux-gnu/libXrandr.so.2 \
   /lib/x86_64-linux-gnu/libXinerama.so.1 \
+  /lib/x86_64-linux-gnu/libpcre2-8.so.0 \
   /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libz.so \
   /lib/x86_64-linux-gnu/libmount.so.1 \
   /lib/x86_64-linux-gnu/libselinux.so.1 \
@@ -191,6 +192,8 @@ CMakeFiles/EmprestimoDeSalas.dir/mainGUI.c.o:
 
 /lib/x86_64-linux-gnu/libgmodule-2.0.so.0:
 
+/usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libglib-2.0.so:
+
 /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libgio-2.0.so:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libpangocairo-1.0.so:
@@ -227,8 +230,6 @@ CMakeFiles/EmprestimoDeSalas.dir/mainGUI.c.o:
 
 /lib/x86_64-linux-gnu/libffi.so.8:
 
-/lib/x86_64-linux-gnu/libpcre2-8.so.0:
-
 /lib64/ld-linux-x86-64.so.2:
 
 /lib/x86_64-linux-gnu/libxkbcommon.so.0:
@@ -250,6 +251,8 @@ CMakeFiles/EmprestimoDeSalas.dir/mainGUI.c.o:
 /lib/x86_64-linux-gnu/libXrandr.so.2:
 
 /lib/x86_64-linux-gnu/libXinerama.so.1:
+
+/lib/x86_64-linux-gnu/libpcre2-8.so.0:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/libz.so:
 

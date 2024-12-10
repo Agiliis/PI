@@ -1,0 +1,2 @@
+/usr/bin/ar qc libreservasFuncs.a CMakeFiles/reservasFuncs.dir/reservasFuncs/reservasFuncs.c.o
+/usr/bin/ranlib libreservasFuncs.a

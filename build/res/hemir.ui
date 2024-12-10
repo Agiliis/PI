@@ -458,14 +458,9 @@
               </packing>
             </child>
             <child>
-              <object class="GtkComboBoxText" id="combo_box_horários">
+              <object class="GtkComboBoxText" id="combo_box_horarios">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <items>
-                  <item translatable="yes">7:10</item>
-                  <item translatable="yes">8:00</item>
-                  <item translatable="yes">8:50</item>
-                </items>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -577,10 +572,6 @@
               <object class="GtkComboBoxText" id="combo_box_salas">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <items>
-                  <item translatable="yes">B08</item>
-                  <item translatable="yes">K11</item>
-                </items>
               </object>
               <packing>
                 <property name="expand">False</property>

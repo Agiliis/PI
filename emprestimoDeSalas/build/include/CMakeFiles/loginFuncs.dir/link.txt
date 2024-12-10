@@ -1,0 +1,2 @@
+/usr/bin/ar qc libloginFuncs.a CMakeFiles/loginFuncs.dir/loginFuncs/loginFuncs.c.o
+/usr/bin/ranlib libloginFuncs.a

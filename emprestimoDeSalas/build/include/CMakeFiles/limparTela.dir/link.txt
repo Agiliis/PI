@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblimparTela.a CMakeFiles/limparTela.dir/limparTela/limparTela.c.o
+/usr/bin/ranlib liblimparTela.a

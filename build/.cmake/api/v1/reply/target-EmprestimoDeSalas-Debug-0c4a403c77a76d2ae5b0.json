@@ -12,7 +12,8 @@
 		[
 			"add_executable",
 			"target_link_libraries",
-			"target_compile_options"
+			"target_compile_options",
+			"target_compile_definitions"
 		],
 		"files" : 
 		[
@@ -32,13 +33,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 4,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 7,
+				"line" : 5,
 				"parent" : 0
 			},
 			{
@@ -54,9 +49,21 @@
 				"parent" : 0
 			},
 			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 5,
+				"line" : 6,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 12,
 				"parent" : 0
 			}
 		]
@@ -160,6 +167,13 @@
 				{
 					"backtrace" : 6,
 					"fragment" : "-pthread"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 7,
+					"define" : "DBG=1"
 				}
 			],
 			"includes" : 
@@ -311,6 +325,13 @@
 			[
 				0
 			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				1
+			]
 		}
 	],
 	"sources" : 
@@ -320,6 +341,11 @@
 			"compileGroupIndex" : 0,
 			"path" : "src/mainGUI.c",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/dbg.h",
+			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"

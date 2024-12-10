@@ -5,6 +5,7 @@ src/CMakeFiles/EmprestimoDeSalas.dir/mainGUI.c.o: /home/agil/dev/Facool/PI/empre
   /home/agil/dev/Facool/PI/emprestimoDeSalas/include/limparTela/limparTela.h \
   /home/agil/dev/Facool/PI/emprestimoDeSalas/include/loginFuncs/loginFuncs.h \
   /home/agil/dev/Facool/PI/emprestimoDeSalas/include/reservasFuncs/reservasFuncs.h \
+  /home/agil/dev/Facool/PI/emprestimoDeSalas/src/dbg.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -1057,6 +1058,8 @@ src/EmprestimoDeSalas: include/liblimparTela.a \
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+
 /usr/include/glib-2.0/glib/gmarkup.h:
 
 /usr/include/glib-2.0/gio/gfileoutputstream.h:
@@ -1263,20 +1266,6 @@ include/libreservasFuncs.a:
 
 /usr/include/glib-2.0/gobject/gsignal.h:
 
-/usr/include/glib-2.0/glib/galloca.h:
-
-/usr/include/glib-2.0/gio/gvolume.h:
-
-/usr/include/gtk-3.0/gtk/deprecated/gtktable.h:
-
-/usr/include/gtk-3.0/gtk/gtkmenubutton.h:
-
-/usr/include/glib-2.0/gobject/gboxed.h:
-
-/usr/include/glib-2.0/gio/gsubprocess.h:
-
-/usr/include/gtk-3.0/gtk/gtksettings.h:
-
 /lib/x86_64-linux-gnu/libzstd.so.1:
 
 /usr/include/gtk-3.0/gtk/gtkdebug.h:
@@ -1343,6 +1332,10 @@ include/libloginFuncs.a:
 
 /usr/include/gtk-3.0/gtk/gtkactionable.h:
 
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
+/usr/include/gtk-3.0/gtk/gtktextbuffer.h:
+
 /usr/include/glib-2.0/gio/gcancellable.h:
 
 /usr/include/gtk-3.0/gtk/gtkimage.h:
@@ -1373,12 +1366,6 @@ include/libloginFuncs.a:
 
 /usr/include/glib-2.0/gio/gsimpleactiongroup.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
-
-/usr/include/glib-2.0/gio/gemblem.h:
-
-/usr/include/glib-2.0/gio/gdbusobjectmanager.h:
-
 /usr/include/glib-2.0/gio/gappinfo.h:
 
 /usr/include/limits.h:
@@ -1404,8 +1391,6 @@ include/libloginFuncs.a:
 /usr/include/glib-2.0/gio/gioenumtypes.h:
 
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-io.h:
-
-/usr/include/gtk-3.0/gtk/gtkcolorbutton.h:
 
 /usr/include/glib-2.0/gio/gdbusobjectproxy.h:
 
@@ -1451,8 +1436,6 @@ include/libloginFuncs.a:
 
 /usr/include/gtk-3.0/gtk/gtkradiotoolbutton.h:
 
-/usr/include/gtk-3.0/gdk/gdkdevicepad.h:
-
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-simple-anim.h:
 
 /usr/include/glib-2.0/gio/gnetworkaddress.h:
@@ -1464,6 +1447,30 @@ include/libloginFuncs.a:
 /usr/include/atk-1.0/atk/atkvalue.h:
 
 /usr/include/glib-2.0/gio/gdatainputstream.h:
+
+/usr/include/glib-2.0/glib/galloca.h:
+
+/usr/include/glib-2.0/gio/gvolume.h:
+
+/usr/include/gtk-3.0/gtk/deprecated/gtktable.h:
+
+/usr/include/gtk-3.0/gtk/gtkmenubutton.h:
+
+/usr/include/glib-2.0/gobject/gboxed.h:
+
+/usr/include/glib-2.0/gio/gsubprocess.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
+
+/usr/include/glib-2.0/gio/gdbusobjectmanager.h:
+
+/usr/include/glib-2.0/gio/gemblem.h:
+
+/usr/include/gtk-3.0/gtk/gtksettings.h:
+
+/usr/include/gtk-3.0/gtk/gtkcolorbutton.h:
+
+/home/agil/dev/Facool/PI/emprestimoDeSalas/src/dbg.h:
 
 /usr/include/gtk-3.0/gtk/gtkstylecontext.h:
 
@@ -1487,23 +1494,27 @@ include/libloginFuncs.a:
 
 /usr/include/gtk-3.0/gtk/gtkgesture.h:
 
-/usr/include/gtk-3.0/gtk/gtkpagesetup.h:
-
-/usr/include/atk-1.0/atk/atkhyperlink.h:
-
 /usr/include/glib-2.0/gio/gunixfdlist.h:
 
 /usr/include/gtk-3.0/gtk/gtkfilefilter.h:
 
 /usr/include/atk-1.0/atk/atkrelation.h:
 
-/usr/include/cairo/cairo-features.h:
+/usr/include/glib-2.0/glib/gtimezone.h:
 
-/usr/include/glib-2.0/gio/ginetsocketaddress.h:
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
-/usr/include/glib-2.0/gio/gio-visibility.h:
+/usr/include/gtk-3.0/gtk/gtkgesturestylus.h:
 
-/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
+/usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-macros.h:
+
+/usr/include/glib-2.0/gio/gcredentials.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/glib-2.0/glib/gmessages.h:
+
+/usr/include/endian.h:
 
 /usr/include/cairo/cairo-version.h:
 
@@ -1514,14 +1525,6 @@ include/libloginFuncs.a:
 /usr/include/glib-2.0/glib/gerror.h:
 
 /usr/include/glib-2.0/gio/gmountoperation.h:
-
-/lib/x86_64-linux-gnu/libxcb.so.1:
-
-/usr/include/glib-2.0/gio/gactionmap.h:
-
-/usr/include/glib-2.0/gio/gdbusinterfaceskeleton.h:
-
-/usr/include/gtk-3.0/gtk/gtktogglebutton.h:
 
 /usr/include/glib-2.0/glib/guri.h:
 
@@ -1547,15 +1550,9 @@ include/liblimparTela.a:
 
 /usr/include/string.h:
 
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
-
 /usr/include/x86_64-linux-gnu/bits/signum-arch.h:
 
 /usr/include/atk-1.0/atk/atkrange.h:
-
-/usr/include/glib-2.0/gio/gconverterinputstream.h:
-
-/usr/include/gtk-3.0/gtk/gtkcolorchooser.h:
 
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-features.h:
 
@@ -1565,29 +1562,29 @@ include/liblimparTela.a:
 
 /usr/include/glib-2.0/gio/gioenums.h:
 
-/usr/include/glib-2.0/glib/gmessages.h:
-
-/usr/include/endian.h:
-
-/usr/include/asm-generic/errno-base.h:
-
 /usr/include/atk-1.0/atk/atkrelationset.h:
 
-/usr/include/glib-2.0/glib/gtimezone.h:
-
-/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
-
-/usr/include/gtk-3.0/gtk/gtkgesturestylus.h:
+/usr/include/cairo/cairo-features.h:
 
 /usr/include/glib-2.0/glib/gstrvbuilder.h:
 
-/usr/include/atk-1.0/atk/atkgobjectaccessible.h:
-
 /usr/include/atk-1.0/atk/atkstateset.h:
 
-/usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-macros.h:
+/usr/include/atk-1.0/atk/atkgobjectaccessible.h:
 
-/usr/include/glib-2.0/gio/gcredentials.h:
+/usr/include/gtk-3.0/gtk/gtkcolorchooser.h:
+
+/usr/include/glib-2.0/gio/gconverterinputstream.h:
+
+/usr/include/glib-2.0/gio/ginetsocketaddress.h:
+
+/usr/include/glib-2.0/gio/gio-visibility.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
+
+/lib/x86_64-linux-gnu/libxcb.so.1:
+
+/usr/include/glib-2.0/gio/gactionmap.h:
 
 /usr/include/glib-2.0/glib/gconvert.h:
 
@@ -1625,6 +1622,14 @@ include/liblimparTela.a:
 
 /usr/include/gtk-3.0/gtk/gtkfixed.h:
 
+/usr/include/gtk-3.0/gtk/gtkpagesetup.h:
+
+/usr/include/atk-1.0/atk/atkhyperlink.h:
+
+/usr/include/glib-2.0/gio/gdbusinterfaceskeleton.h:
+
+/usr/include/gtk-3.0/gtk/gtktogglebutton.h:
+
 /usr/include/glib-2.0/gio/gapplicationcommandline.h:
 
 /usr/include/gtk-3.0/gtk/gtkflowbox.h:
@@ -1649,6 +1654,10 @@ include/liblimparTela.a:
 
 /usr/include/harfbuzz/hb-face.h:
 
+/usr/include/glib-2.0/gio/gpropertyaction.h:
+
+/usr/include/dirent.h:
+
 /usr/include/glib-2.0/gio/gasyncresult.h:
 
 /usr/include/glib-2.0/gio/gdbusauthobserver.h:
@@ -1662,14 +1671,6 @@ include/liblimparTela.a:
 /usr/include/errno.h:
 
 /usr/include/glib-2.0/gio/gdbusconnection.h:
-
-/usr/include/dirent.h:
-
-/usr/include/glib-2.0/gio/gpropertyaction.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
-
-/usr/include/gtk-3.0/gtk/gtktextbuffer.h:
 
 /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h:
 
@@ -1748,6 +1749,10 @@ include/liblimparTela.a:
 /usr/include/gtk-3.0/gtk/gtkoffscreenwindow.h:
 
 /usr/include/glib-2.0/gio/gsimpleasyncresult.h:
+
+/usr/include/gtk-3.0/gtk/gtkwidget.h:
+
+/usr/include/gtk-3.0/gtk/gtkaccelmap.h:
 
 /usr/include/gtk-3.0/gtk/gtkadjustment.h:
 
@@ -1928,6 +1933,8 @@ include/liblimparTela.a:
 /usr/include/glib-2.0/gobject/gparam.h:
 
 /usr/include/glib-2.0/gio/gpollableinputstream.h:
+
+/usr/include/gtk-3.0/gdk/gdkdevicepad.h:
 
 /usr/include/x86_64-linux-gnu/bits/timesize.h:
 
@@ -2500,10 +2507,6 @@ include/liblimparTela.a:
 /lib/x86_64-linux-gnu/libblkid.so.1:
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
-
-/usr/include/gtk-3.0/gtk/gtkaccelmap.h:
-
-/usr/include/gtk-3.0/gtk/gtkwidget.h:
 
 /usr/include/harfbuzz/hb-buffer.h:
 

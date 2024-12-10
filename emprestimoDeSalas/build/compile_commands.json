@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/agil/dev/Facool/PI/emprestimoDeSalas/build",
+  "command": "/usr/bin/gcc -I/home/agil/dev/Facool/PI/emprestimoDeSalas/include -g -o include/CMakeFiles/limparTela.dir/limparTela/limparTela.c.o -c /home/agil/dev/Facool/PI/emprestimoDeSalas/include/limparTela/limparTela.c",
+  "file": "/home/agil/dev/Facool/PI/emprestimoDeSalas/include/limparTela/limparTela.c",
+  "output": "include/CMakeFiles/limparTela.dir/limparTela/limparTela.c.o"
+},
+{
+  "directory": "/home/agil/dev/Facool/PI/emprestimoDeSalas/build",
+  "command": "/usr/bin/gcc -I/home/agil/dev/Facool/PI/emprestimoDeSalas/include -g -o include/CMakeFiles/loginFuncs.dir/loginFuncs/loginFuncs.c.o -c /home/agil/dev/Facool/PI/emprestimoDeSalas/include/loginFuncs/loginFuncs.c",
+  "file": "/home/agil/dev/Facool/PI/emprestimoDeSalas/include/loginFuncs/loginFuncs.c",
+  "output": "include/CMakeFiles/loginFuncs.dir/loginFuncs/loginFuncs.c.o"
+},
+{
+  "directory": "/home/agil/dev/Facool/PI/emprestimoDeSalas/build",
+  "command": "/usr/bin/gcc -I/home/agil/dev/Facool/PI/emprestimoDeSalas/include -g -o include/CMakeFiles/reservasFuncs.dir/reservasFuncs/reservasFuncs.c.o -c /home/agil/dev/Facool/PI/emprestimoDeSalas/include/reservasFuncs/reservasFuncs.c",
+  "file": "/home/agil/dev/Facool/PI/emprestimoDeSalas/include/reservasFuncs/reservasFuncs.c",
+  "output": "include/CMakeFiles/reservasFuncs.dir/reservasFuncs/reservasFuncs.c.o"
+},
+{
+  "directory": "/home/agil/dev/Facool/PI/emprestimoDeSalas/build",
+  "command": "/usr/bin/gcc -I/home/agil/dev/Facool/PI/emprestimoDeSalas/include -g -o src/CMakeFiles/EmprestimoDeSalas.dir/main.c.o -c /home/agil/dev/Facool/PI/emprestimoDeSalas/src/main.c",
+  "file": "/home/agil/dev/Facool/PI/emprestimoDeSalas/src/main.c",
+  "output": "src/CMakeFiles/EmprestimoDeSalas.dir/main.c.o"
+}
+]
