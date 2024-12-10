@@ -16,7 +16,7 @@ const char *horarios[] = {  "07:10", "08:00", "08:50", "09:40", "10:30", "11:20"
 
 /****************************************
    
-        ESTRUTURA
+        ESTRUTURA (a fazer)
         - Mostra primeira das salas disponíveis
         - Pergunta se ele quer
             - Caso sim: chama funcao de reservar
@@ -70,6 +70,7 @@ void ler_reservas(char *pathDoArq, Reserva *reservas, int *num_reservas){
 
 void escolher_data(char data[]){
     int ok;
+    char buffer[BUFSIZ];
 
     ok = 1;
     do{
@@ -80,11 +81,10 @@ void escolher_data(char data[]){
 
         printf("Digite a data (DD-MM-AAAA): ");
 
-        fgets(data, 12, stdin);
-        char *aux = strtok(data, "\n");
-        strcpy(data, aux);
+        fgets(buffer, BUFSIZ, stdin);
 
-        //dbgs(data)
+        char *aux = strtok(buffer, "\n");
+        strcpy(data, aux);
 
         ok = check_data(data);
 
@@ -111,10 +111,11 @@ void escolher_horario(char *horario_escolhido) {
         printf("Digite o numero do horario desejado: ");
         
         fgets(escolha, 4, stdin);
-        //scanf("%d", &escolha);
 
         escolhaNum = atoi(escolha);
+
         ok = (1 <= escolhaNum && escolhaNum <= NUM_HORARIOS);
+
     } while (!ok);
 
     limpar_tela();
@@ -146,6 +147,7 @@ void criar_reserva(Sala salas[], Reserva reservas[], int *num_reservas, const ch
         id_sala = strtol(buffer, NULL, 10);
 
         ok = id_sala != 0 && check_disponibilidade(reservas, (*num_reservas), id_sala, data, horario) == 1;
+
     }while(!ok);
 
     limpar_tela();
@@ -155,14 +157,16 @@ void criar_reserva(Sala salas[], Reserva reservas[], int *num_reservas, const ch
     strcpy(nova_reserva.horario, horario);
 
 
-    reservas[*num_reservas] = nova_reserva;
+    reservas[(*num_reservas)] = nova_reserva;
     (*num_reservas)++;
 
 
     FILE *arquivo = fopen(nome_arquivo, "a");
     if (!arquivo) {
-        perror("Erro ao abrir o arquivo de reservas");
-        return;
+        perror("Erro ao abrir o arquivo de reservas. Verifique se ele se encontra em res/");
+        puts("Pressione qualquer tecla para fechar..."); getchar();
+
+        exit(1);
     }
 
     fprintf(arquivo, "%d %s %s\n", id_sala, data, horario);
@@ -195,6 +199,7 @@ void remover_reserva(Sala salas[], Reserva reservas[], int *num_reservas, const 
         id_sala = strtol(buffer, NULL, 10);
 
         ok = id_sala != 0 && check_disponibilidade(reservas, (*num_reservas), id_sala, data, horario) == 0;
+
     }while(!ok);
 
     limpar_tela();
@@ -220,7 +225,8 @@ void remover_reserva(Sala salas[], Reserva reservas[], int *num_reservas, const 
     FILE *arquivo = fopen(nome_arquivo, "w");
     if (!arquivo) {
         perror("Erro ao abrir o arquivo de reservas");
-        return;
+        puts("Pressione qualquer tecla para fechar..."); getchar();
+        exit(1);
     }
 
     fprintf(arquivo, "ID_Sala Data Horario\n");
@@ -295,7 +301,6 @@ int check_data(char data[]){
     if(token == NULL) return 0; // checagem pra se contem so 1 '-'
     ano = strtol(token, NULL, 10);
 
-    //dbgi(dia) dbgi(mes) dbgi(ano)
 
     int limInf = 1;
     if(mes == mesAtual) limInf = diaAtual;
@@ -308,8 +313,6 @@ int check_data(char data[]){
 }
 
 int check_disponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario) {
-    // dbgi(num_reservas)
-    // dbgi(id_sala)
     
     for (int i = 0; i < num_reservas; i++) {
         if (reservas[i].id_sala == id_sala &&

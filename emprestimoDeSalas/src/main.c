@@ -6,9 +6,9 @@
 #include <limparTela.h>
 #include "dbg.h"
 
-char    *pth_userBase   = "../res/userBase.txt",
-        *pth_salas      = "../res/salas.csv",
-        *pth_reservas   = "../res/reservas.csv";
+char    *pth_userBase   = "res/userBase.txt",
+        *pth_salas      = "res/salas.csv",
+        *pth_reservas   = "res/reservas.csv";
 
 int pedido_em_intervalo(char *opcoes[], int numOpcoes, char *pedido);
 void listar_opcoes(char *opcoes[], int numOpcoes);
@@ -45,10 +45,13 @@ int main(){
             usuario = tela_de_login(usuarios, userCnt);
 
             if(strcmp(usuario.email, "no_user") == 0) continue;
+
             break;
         case 2:
-            cadastrar_login(pth_userBase, usuarios, &userCnt);
+            usuario = cadastrar_login(pth_userBase, usuarios, &userCnt);
             
+            if(strcmp(usuario.email, "no_user") == 0) continue;
+
             continue;
         case 3:
             puts("adios");
@@ -70,7 +73,7 @@ int main(){
 
                 escolher_horario(horario);
                 
-                criar_reserva(salas, reservas, &num_reservas, "../res/reservas.csv", data, horario);
+                criar_reserva(salas, reservas, &num_reservas, pth_reservas, data, horario);
 
                 continue;
             case 2:
@@ -78,7 +81,7 @@ int main(){
 
                 escolher_horario(horario);
                 
-                remover_reserva(salas, reservas, &num_reservas, "../res/reservas.csv", data, horario);
+                remover_reserva(salas, reservas, &num_reservas, pth_reservas, data, horario);
                 
                 continue;
             case 3:

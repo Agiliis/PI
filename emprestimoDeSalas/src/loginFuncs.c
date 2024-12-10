@@ -9,6 +9,7 @@ void ler_base_de_usuarios(char *pathToArq, User *usrArr, int *userCnt){
 
     if(userBase == NULL){
         perror("Erro ao abrir arquivo res/userBase.txt");
+        puts("Pressione qualquer tecla para fechar..."); getchar();
         exit(1);
     }
 
@@ -34,7 +35,7 @@ User tela_de_login(User usuarios[], int userCnt){
             puts("Email nao encontrado");
         }
 
-        puts("Digite seu email ou 'ret' para retornar");
+        puts("Digite seu email institucional @poli.br ou 'ret' para retornar");
 
         fgets(buffer, BUFSIZ, stdin);
 
@@ -87,15 +88,16 @@ User tela_de_login(User usuarios[], int userCnt){
 
 }
 
-void cadastrar_login(char *pathToUserBase, User *usuarios, int *userCnt){
+User cadastrar_login(char *pathToUserBase, User *usuarios, int *userCnt){
     int ok;
     char buffer[BUFSIZ];
-    User user;
+    User user, no_user = {.email = "no_user"};
 
     FILE *userBase = fopen(pathToUserBase, "a");
 
     if(userBase == NULL){
         perror("Erro ao abrir userBase.txt");
+        puts("Pressione qualquer tecla para fechar..."); getchar();
         exit(1);
     }
 
@@ -106,9 +108,14 @@ void cadastrar_login(char *pathToUserBase, User *usuarios, int *userCnt){
             puts("Email invalido!");
         }
 
-        puts("Digite seu email institucional @poli.br");
+        puts("Digite seu email institucional @poli.br ou 'ret' para retornar");
 
         fgets(buffer, BUFSIZ, stdin);
+
+        if(strcmp(buffer, "ret\n\0") == 0){
+            limpar_tela();
+            return no_user;
+        }
 
         char *aux = strtok(buffer, "\n");
         strcpy(user.email, aux);
@@ -148,7 +155,11 @@ void cadastrar_login(char *pathToUserBase, User *usuarios, int *userCnt){
     (*userCnt)++;
 
     fclose(userBase);
+
+    return user;
 }
+
+/********************************************************************/
 
 int check_user(User *user, User usuarios[], int userCnt){
 
