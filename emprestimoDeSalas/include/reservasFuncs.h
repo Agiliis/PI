@@ -27,15 +27,23 @@ void ler_reservas(char *pathDoArq, Reserva *reservas, int *num_reservas);
 void escolher_data(char data[]);
 void escolher_horario(char *horario_escolhido);
 
-void reservar_sala(Sala salas[], Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario);
+void criar_reserva(Sala salas[], Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario);
+void remover_reserva(Sala salas[], Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario);
 
-// funcoes internas de outras funcoes
+/******** funcoes internas de outras funcoes *******/
+
 void listar_horarios();
-void listar_salas_disponiveis(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario);
+
+/*
+"disponivel": lista salas disponiveis
+"indisponivel": lista salas indisponiveis
+*/
+void listar_salas(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario, const char *modo);
 
 int check_data(char data[]);
 int check_disponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario);
-//
+
+/**************************************************/
 
 
 

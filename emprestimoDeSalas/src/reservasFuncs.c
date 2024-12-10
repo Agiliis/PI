@@ -15,41 +15,14 @@ const char *horarios[] = {  "07:10", "08:00", "08:50", "09:40", "10:30", "11:20"
                             "20:30", "21:20", "22:10", "23:00"};
 
 /****************************************
-int main() {
-
-    ler_relacao_das_salas("../res/salas.csv", salas);
-    ler_reservas("../res/reservas.csv", reservas);
-
-    
-        ESTRUTURA
+   
+        ESTRUTURA (a fazer)
         - Mostra primeira das salas disponíveis
         - Pergunta se ele quer
             - Caso sim: chama funcao de reservar
             - Caso nao: chama listar_salas_disponiveis
         - Retorna a tela de confirmacao de sala
-    
 
-    char continuar = 'S';
-    while (continuar == 'S' || continuar == 's') {
-        char data[12];
-        escolher_data(data);
-
-        char horario[6];
-        escolher_horario(horario);
-        
-        reservar_sala(reservas, &num_reservas, "../res/reservas.csv", data, horario);
-
-        puts("Deseja reservar outra sala? (S/N)");
-        scanf(" %c", &continuar);
-        getchar(); // bruxaria pra data nao ler '\n'
-
-        limpar_tela();
-    }
-
-    printf("Obrigado por usar o sistema de reservas!\n");
-
-    return 0;
-}
 ********************************************/
 
 void ler_relacao_das_salas(char *pathDoArq, Sala *salas){
@@ -97,6 +70,7 @@ void ler_reservas(char *pathDoArq, Reserva *reservas, int *num_reservas){
 
 void escolher_data(char data[]){
     int ok;
+    char buffer[BUFSIZ];
 
     ok = 1;
     do{
@@ -107,11 +81,10 @@ void escolher_data(char data[]){
 
         printf("Digite a data (DD-MM-AAAA): ");
 
-        fgets(data, 12, stdin);
-        char *aux = strtok(data, "\n");
-        strcpy(data, aux);
+        fgets(buffer, BUFSIZ, stdin);
 
-        //dbgs(data)
+        char *aux = strtok(buffer, "\n");
+        strcpy(data, aux);
 
         ok = check_data(data);
 
@@ -138,10 +111,11 @@ void escolher_horario(char *horario_escolhido) {
         printf("Digite o numero do horario desejado: ");
         
         fgets(escolha, 4, stdin);
-        //scanf("%d", &escolha);
 
         escolhaNum = atoi(escolha);
+
         ok = (1 <= escolhaNum && escolhaNum <= NUM_HORARIOS);
+
     } while (!ok);
 
     limpar_tela();
@@ -149,11 +123,11 @@ void escolher_horario(char *horario_escolhido) {
     strcpy(horario_escolhido, horarios[escolhaNum - 1]);
 }
 
-void reservar_sala(Sala salas[], Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario) {
+void criar_reserva(Sala salas[], Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario) {
     int id_sala;
     int ok;
 
-    listar_salas_disponiveis(salas, reservas, (*num_reservas), data, horario);
+    listar_salas(salas, reservas, (*num_reservas), data, horario, "disponivel");
 
     ok = 1;
     do{
@@ -161,7 +135,7 @@ void reservar_sala(Sala salas[], Reserva reservas[], int *num_reservas, const ch
 
         if(!ok){
             limpar_tela();
-            listar_salas_disponiveis(salas, reservas, (*num_reservas), data, horario);
+            listar_salas(salas, reservas, (*num_reservas), data, horario, "disponivel");
             puts("Opcao invalida!");
         }
 
@@ -172,7 +146,8 @@ void reservar_sala(Sala salas[], Reserva reservas[], int *num_reservas, const ch
         char *aux = strtok(buffer, "\n");
         id_sala = strtol(buffer, NULL, 10);
 
-        ok = id_sala != 0 && check_disponibilidade(reservas, (*num_reservas), id_sala, data, horario);
+        ok = id_sala != 0 && check_disponibilidade(reservas, (*num_reservas), id_sala, data, horario) == 1;
+
     }while(!ok);
 
     limpar_tela();
@@ -182,20 +157,86 @@ void reservar_sala(Sala salas[], Reserva reservas[], int *num_reservas, const ch
     strcpy(nova_reserva.horario, horario);
 
 
-    reservas[*num_reservas] = nova_reserva;
+    reservas[(*num_reservas)] = nova_reserva;
     (*num_reservas)++;
 
 
     FILE *arquivo = fopen(nome_arquivo, "a");
     if (!arquivo) {
-        perror("Erro ao abrir o arquivo de reservas");
-        return;
+        perror("Erro ao abrir o arquivo de reservas. Verifique se ele se encontra em res/");
+        puts("Pressione qualquer tecla para fechar..."); getchar();
+
+        exit(1);
     }
 
-    fprintf(arquivo, "\n%d %s %s", id_sala, data, horario);
+    fprintf(arquivo, "%d %s %s\n", id_sala, data, horario);
     fclose(arquivo);
 
     printf("Reserva da sala %d realizada com sucesso para a data %s no horário %s.\n", id_sala, data, horario);
+}
+
+void remover_reserva(Sala salas[], Reserva reservas[], int *num_reservas, const char *nome_arquivo, char *data, char *horario){
+    int id_sala;
+    int ok;
+
+    listar_salas(salas, reservas, (*num_reservas), data, horario, "indisponivel");
+
+    ok = 1;
+    do{
+        char buffer[BUFSIZ];
+
+        if(!ok){
+            limpar_tela();
+            listar_salas(salas, reservas, (*num_reservas), data, horario, "indisponivel");
+            puts("Opcao invalida!");
+        }
+
+        puts("Digite o ID da sala que deseja remover");
+
+        fgets(buffer, sizeof(buffer), stdin);
+
+        char *aux = strtok(buffer, "\n");
+        id_sala = strtol(buffer, NULL, 10);
+
+        ok = id_sala != 0 && check_disponibilidade(reservas, (*num_reservas), id_sala, data, horario) == 0;
+
+    }while(!ok);
+
+    limpar_tela();
+
+    Reserva aux[MAX_RESERVAS];
+    for(int i = 0; i < (*num_reservas); i++){
+        aux[i] = reservas[i];
+    }
+    
+    memset(reservas, 0, sizeof(Reserva));
+
+    for(int i = 0, j = 0; i < (*num_reservas); i++, j++){
+        if(aux[i].id_sala == id_sala){
+            j--;
+            continue;
+        }
+
+        reservas[j] = aux[i];
+    }
+
+    (*num_reservas)--;
+
+    FILE *arquivo = fopen(nome_arquivo, "w");
+    if (!arquivo) {
+        perror("Erro ao abrir o arquivo de reservas");
+        puts("Pressione qualquer tecla para fechar..."); getchar();
+        exit(1);
+    }
+
+    fprintf(arquivo, "ID_Sala Data Horario\n");
+    for(int i = 1; i < (*num_reservas); i++){
+        fprintf(arquivo, "%d %s %s\n", reservas[i].id_sala, reservas[i].data, reservas[i].horario);
+    }
+    
+    fclose(arquivo);
+
+    printf("Reserva da sala %d removida com sucesso para a data %s no horário %s.\n", id_sala, data, horario);
 }
 
 /**************************************/
@@ -207,21 +248,29 @@ void listar_horarios(){
     }
 }
 
-void listar_salas_disponiveis(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario) {
-    int encontrou_disponivel = 0;
-    
-    printf("Salas disponiveis para a data %s no horario %s:\n", data, horario);
+void listar_salas(Sala salas[], Reserva reservas[], int num_reservas, char *data, char *horario, const char *modo) {
+    int encontrou = 0;
+    int modoCheck;
+
+    if      (strcmp(modo, "disponivel")     == 0) modoCheck = 1;
+    else if (strcmp(modo, "indisponivel")   == 0) modoCheck = 0;
+    else{
+        perror("Argumento para 'modo' invalido");
+        exit(1);
+    }
+
+    printf("Salas %s\bis para a data %s no horario %s:\n", modo, data, horario);
 
     for (int i = 1; i < MAX_SALAS; i++) {
-        if (check_disponibilidade(reservas, num_reservas, salas[i].id, data, horario) == 1) {
+        if (check_disponibilidade(reservas, num_reservas, salas[i].id, data, horario) == modoCheck) {
             printf("ID: %d\t| Nome: %s\t| Tipo: %s\t| Bloco: %s\n",
                    salas[i].id, salas[i].nome, salas[i].tipo, salas[i].bloco);
-            encontrou_disponivel = 1;
+            encontrou = 1;
         }
     }
 
-    if (!encontrou_disponivel) {
-        printf("Nenhuma sala disponivel para o horario solicitado.\n");
+    if (!encontrou) {
+        printf("Nenhuma sala %s para o horario solicitado.\n", modo);
     }
 }
 
@@ -252,7 +301,6 @@ int check_data(char data[]){
     if(token == NULL) return 0; // checagem pra se contem so 1 '-'
     ano = strtol(token, NULL, 10);
 
-    //dbgi(dia) dbgi(mes) dbgi(ano)
 
     int limInf = 1;
     if(mes == mesAtual) limInf = diaAtual;
@@ -265,8 +313,6 @@ int check_data(char data[]){
 }
 
 int check_disponibilidade(Reserva reservas[], int num_reservas, int id_sala, char *data, char *horario) {
-    // dbgi(num_reservas)
-    // dbgi(id_sala)
     
     for (int i = 0; i < num_reservas; i++) {
         if (reservas[i].id_sala == id_sala &&

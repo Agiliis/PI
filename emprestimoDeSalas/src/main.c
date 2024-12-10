@@ -6,6 +6,10 @@
 #include <limparTela.h>
 #include "dbg.h"
 
+char    *pth_userBase   = "res/userBase.txt",
+        *pth_salas      = "res/salas.csv",
+        *pth_reservas   = "res/reservas.csv";
+
 int pedido_em_intervalo(char *opcoes[], int numOpcoes, char *pedido);
 void listar_opcoes(char *opcoes[], int numOpcoes);
 
@@ -19,14 +23,17 @@ int main(){
     Reserva reservas[MAX_RESERVAS];
     int num_reservas = 0;
 
+    char data[12];
+    char horario[6];
+
     ler_base_de_usuarios
-    ("../res/userBase.txt", usuarios, &userCnt);
+    (pth_userBase, usuarios, &userCnt);
     
     ler_relacao_das_salas   
-    ("../res/salas.csv", salas);
+    (pth_salas, salas);
     
     ler_reservas            
-    ("../res/reservas.csv", reservas, &num_reservas);
+    (pth_reservas, reservas, &num_reservas);
 
     while(1){
         char *opcoes[] = {"Fazer login", "Cadastrar login", "Sair do programa"};
@@ -38,10 +45,13 @@ int main(){
             usuario = tela_de_login(usuarios, userCnt);
 
             if(strcmp(usuario.email, "no_user") == 0) continue;
+
             break;
         case 2:
-            cadastrar_login(usuarios, &userCnt);
+            usuario = cadastrar_login(pth_userBase, usuarios, &userCnt);
             
+            if(strcmp(usuario.email, "no_user") == 0) continue;
+
             continue;
         case 3:
             puts("adios");
@@ -59,17 +69,20 @@ int main(){
 
             switch(resposta){
             case 1:
-                char data[12];
                 escolher_data(data);
 
-                char horario[6];
                 escolher_horario(horario);
                 
-                reservar_sala(salas, reservas, &num_reservas, "../res/reservas.csv", data, horario);
+                criar_reserva(salas, reservas, &num_reservas, pth_reservas, data, horario);
 
                 continue;
             case 2:
-                //remover_salas();
+                escolher_data(data);
+
+                escolher_horario(horario);
+                
+                remover_reserva(salas, reservas, &num_reservas, pth_reservas, data, horario);
+                
                 continue;
             case 3:
                 break;
