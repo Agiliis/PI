@@ -6,5 +6,6 @@
 /home/agil/dev/Facool/PI/build/include/CMakeFiles/edit_cache.dir
 /home/agil/dev/Facool/PI/build/include/CMakeFiles/rebuild_cache.dir
 /home/agil/dev/Facool/PI/build/src/CMakeFiles/EmprestimoDeSalas.dir
+/home/agil/dev/Facool/PI/build/src/CMakeFiles/EmprestimoDeSalas_terminal.dir
 /home/agil/dev/Facool/PI/build/src/CMakeFiles/edit_cache.dir
 /home/agil/dev/Facool/PI/build/src/CMakeFiles/rebuild_cache.dir

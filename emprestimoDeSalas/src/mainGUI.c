@@ -16,8 +16,11 @@ GtkBuilder *builder;
 GtkWidget *window;
 GtkStack *stack;
 GtkComboBoxText *combobox_horarios;
+GtkComboBoxText *combobox_horarios_cancelamento;
 GtkComboBoxText *combobox_salas;
+GtkComboBoxText *combobox_salas_reservadas;
 GtkCalendar *calendario;
+GtkCalendar *calendario_cancelamento;
 
 User usuario;
 User usuarios[USER_MAX_NUM];
@@ -57,16 +60,16 @@ void on_cadastro_button_clicked(GtkWidget *widget, gpointer data) {
 }
 
 void on_login_button_clicked(GtkWidget *widget, gpointer data) {
-    GtkEntry *entry_email = GTK_ENTRY(gtk_builder_get_object(builder, "email_in"));
-    GtkEntry *entry_senha = GTK_ENTRY(gtk_builder_get_object(builder, "senha_in"));
+    // GtkEntry *entry_email = GTK_ENTRY(gtk_builder_get_object(builder, "email_in"));
+    // GtkEntry *entry_senha = GTK_ENTRY(gtk_builder_get_object(builder, "senha_in"));
 
-    const char *email = gtk_entry_get_text(entry_email);
-    const char *senha = gtk_entry_get_text(entry_senha);
+    // const char *email = gtk_entry_get_text(entry_email);
+    // const char *senha = gtk_entry_get_text(entry_senha);
 
-    User user;
-    strcpy(user.email, email);
+    // User user;
+    // strcpy(user.email, email);
 
-    if(check_email(user.email) && check_user(&user, usuarios, userCnt) && strcmp(user.senha, senha) == 0)
+    // if(check_email(user.email) && check_user(&user, usuarios, userCnt) && strcmp(user.senha, senha) == 0)
         gtk_stack_set_visible_child_name(stack, "page0");
 }
 
@@ -191,6 +194,95 @@ void on_excluir_reserva_clicked(GtkWidget *widget, gpointer data) {
     gtk_stack_set_visible_child_name(stack, "page0");
 }
 
+void on_voltar_tela_exclusao_final_clicked(GtkWidget *widget, gpointer data) {
+
+
+    gtk_stack_set_visible_child_name(stack, "page1");
+}
+
+void on_exclussao_botao_final_clicked(GtkWidget *widget, gpointer data) {
+    int id_sala;
+    char *sala_nome = gtk_combo_box_text_get_active_text(combobox_salas_reservadas); 
+
+    for(int i = 1; i < MAX_SALAS; i++){
+        if(strcmp(salas[i].nome, sala_nome) == 0){
+            id_sala = salas[i].id;
+            break;
+        }
+    }
+    
+    Reserva aux[MAX_RESERVAS];
+    for(int i = 0; i < num_reservas; i++){
+        aux[i] = reservas[i];
+    }
+    
+    memset(reservas, 0, sizeof(Reserva));
+
+    for(int i = 0, j = 0; i < num_reservas; i++, j++){
+        if(aux[i].id_sala == id_sala){
+            j--;
+            continue;
+        }
+
+        reservas[j] = aux[i];
+
+        dbgi(aux[i].id_sala);
+    }
+
+    num_reservas--;
+
+    FILE *arquivo = fopen(pth_reservas, "w");
+    if (!arquivo) {
+        perror("Erro ao abrir o arquivo de reservas");
+        puts("Pressione qualquer tecla para fechar..."); getchar();
+        exit(1);
+    }
+
+    fprintf(arquivo, "ID_Sala Data Horario\n");
+    for(int i = 1; i < num_reservas; i++){
+        fprintf(arquivo, "%d %s %s\n", reservas[i].id_sala, reservas[i].data, reservas[i].horario);
+    }
+    
+    fclose(arquivo);
+
+    gtk_stack_set_visible_child_name(stack, "page0");
+}
+
+void on_exclusao_reservas_clicked(GtkWidget *widget, gpointer data) {
+    gtk_stack_set_visible_child_name(stack, "page0");
+}
+
+void on_localizar_cancelamento_clicked(GtkWidget *widget, gpointer data) {
+    int dia, mes, ano;
+    calendario_cancelamento = GTK_CALENDAR(gtk_builder_get_object(builder, "calendario_cancelamento"));
+    
+    gtk_calendar_get_date(calendario_cancelamento, &ano, &mes, &dia); mes++; // mes retorna de 0 a 11 por algum motivo
+
+    sprintf(data_calend, "%d-%d-%d", dia, mes, ano);
+
+    strcpy(horario, gtk_combo_box_text_get_active_text(combobox_horarios_cancelamento)); 
+
+    #warning completar if
+    if(check_data(data_calend) /* e cpf digitado*/){
+
+        gtk_combo_box_text_remove_all(combobox_salas_reservadas);
+
+        for(int i = 1; i < MAX_SALAS; i++){
+            dbgs(salas[i].nome);
+            dbgi(check_disponibilidade(reservas, num_reservas, salas[i].id, data_calend, horario));
+
+            if (check_disponibilidade(reservas, num_reservas, salas[i].id, data_calend, horario) == 0) {
+                gtk_combo_box_text_append_text(combobox_salas_reservadas, salas[i].nome);
+            }
+        }
+
+        gtk_combo_box_set_active(GTK_COMBO_BOX(combobox_salas_reservadas), 0);
+
+        gtk_stack_set_visible_child_name(stack, "page5");
+
+    }
+
+}
 
 int main(int argc, char *argv[]) {
 
@@ -207,22 +299,26 @@ int main(int argc, char *argv[]) {
     builder = gtk_builder_new_from_file("../res/hemir.ui");
 
     gtk_builder_add_callback_symbols(builder,
-    "on_view_cancelar_reserva_destroy", G_CALLBACK(on_view_cancelar_reserva_destroy),
-    "on_login_button_clicked",          G_CALLBACK(on_login_button_clicked),
-    "on_button_novo_usu_clicked",       G_CALLBACK(on_button_novo_usu_clicked),
-    "on_lembrar_usu_toggled",           G_CALLBACK(on_lembrar_usu_toggled),
-    "on_cadastro_button_clicked",       G_CALLBACK(on_cadastro_button_clicked),
-    "on_exit_button_clicked",           G_CALLBACK(on_exit_button_clicked),
-    "on_button_voltar_cad_clicked",     G_CALLBACK(on_button_voltar_cad_clicked),
-    "on_button_cadastar_cad_clicked",   G_CALLBACK(on_button_cadastar_cad_clicked),
-    "on_button_reserva_clicked",        G_CALLBACK(on_button_reserva_clicked),
-    "on_cancelar_reserva_clicked",      G_CALLBACK(on_cancelar_reserva_clicked),
-    "on_localizar_reserva_clicked",     G_CALLBACK(on_localizar_reserva_clicked),
-    "on_voltar_reserva_clicked",        G_CALLBACK(on_voltar_reserva_clicked),
-    "on_button_confirmar_clicked",      G_CALLBACK(on_button_confirmar_clicked),
-    "on_button_volta_clicked",          G_CALLBACK(on_button_volta_clicked),
-    "on_confirmar_reserva_clicked",     G_CALLBACK(on_confirmar_reserva_clicked),
-    "on_excluir_reserva_clicked",       G_CALLBACK(on_excluir_reserva_clicked),
+    "on_view_cancelar_reserva_destroy",         G_CALLBACK(on_view_cancelar_reserva_destroy),
+    "on_login_button_clicked",                  G_CALLBACK(on_login_button_clicked),
+    "on_button_novo_usu_clicked",               G_CALLBACK(on_button_novo_usu_clicked),
+    "on_lembrar_usu_toggled",                   G_CALLBACK(on_lembrar_usu_toggled),
+    "on_cadastro_button_clicked",               G_CALLBACK(on_cadastro_button_clicked),
+    "on_exit_button_clicked",                   G_CALLBACK(on_exit_button_clicked),
+    "on_button_voltar_cad_clicked",             G_CALLBACK(on_button_voltar_cad_clicked),
+    "on_button_cadastar_cad_clicked",           G_CALLBACK(on_button_cadastar_cad_clicked),
+    "on_button_reserva_clicked",                G_CALLBACK(on_button_reserva_clicked),
+    "on_cancelar_reserva_clicked",              G_CALLBACK(on_cancelar_reserva_clicked),
+    "on_localizar_reserva_clicked",             G_CALLBACK(on_localizar_reserva_clicked),
+    "on_voltar_reserva_clicked",                G_CALLBACK(on_voltar_reserva_clicked),
+    "on_button_confirmar_clicked",              G_CALLBACK(on_button_confirmar_clicked),
+    "on_button_volta_clicked",                  G_CALLBACK(on_button_volta_clicked),
+    "on_confirmar_reserva_clicked",             G_CALLBACK(on_confirmar_reserva_clicked),
+    "on_excluir_reserva_clicked",               G_CALLBACK(on_excluir_reserva_clicked),
+    "on_voltar_tela_exclusao_final_clicked",    G_CALLBACK(on_voltar_tela_exclusao_final_clicked),
+    "on_exclussao_botao_final_clicked",         G_CALLBACK(on_exclussao_botao_final_clicked),
+    "on_exclusao_reservas_clicked",             G_CALLBACK(on_exclusao_reservas_clicked),
+    "on_localizar_cancelamento_clicked",        G_CALLBACK(on_localizar_cancelamento_clicked),
                                      NULL);
     gtk_builder_connect_signals(builder, NULL);
 
@@ -232,6 +328,9 @@ int main(int argc, char *argv[]) {
     combobox_horarios = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(builder, "combo_box_horarios"));
     combobox_salas =    GTK_COMBO_BOX_TEXT(gtk_builder_get_object(builder, "combo_box_salas"));
 
+    combobox_horarios_cancelamento = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(builder, "combo_box_cancelamento_horarios"));
+    combobox_salas_reservadas =    GTK_COMBO_BOX_TEXT(gtk_builder_get_object(builder, "combo_box_exclusao_reservas_relacao"));
+
 
     for(int i = 0; i < 20; i++){
         char *index = malloc(3);
@@ -240,7 +339,15 @@ int main(int argc, char *argv[]) {
         gtk_combo_box_text_append(combobox_horarios, index, horarios[i]);
     }
 
+    for(int i = 0; i < 20; i++){
+        char *index = malloc(3);
+        snprintf(index, sizeof(index), "%d", i);
+
+        gtk_combo_box_text_append(combobox_horarios_cancelamento, index, horarios[i]);
+    }
+
     gtk_combo_box_set_active(GTK_COMBO_BOX(combobox_horarios), 0);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(combobox_horarios_cancelamento), 0);
 
     gtk_widget_show_all(window);
     gtk_main();

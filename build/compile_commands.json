@@ -22,5 +22,11 @@
   "command": "/usr/bin/cc -DDBG=1 -I/home/agil/dev/Facool/PI/emprestimoDeSalas/include -g -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -pthread -o CMakeFiles/EmprestimoDeSalas.dir/mainGUI.c.o -c /home/agil/dev/Facool/PI/emprestimoDeSalas/src/mainGUI.c",
   "file": "/home/agil/dev/Facool/PI/emprestimoDeSalas/src/mainGUI.c",
   "output": "src/CMakeFiles/EmprestimoDeSalas.dir/mainGUI.c.o"
+},
+{
+  "directory": "/home/agil/dev/Facool/PI/build/src",
+  "command": "/usr/bin/cc -DDBG=0 -I/home/agil/dev/Facool/PI/emprestimoDeSalas/include -g -o CMakeFiles/EmprestimoDeSalas_terminal.dir/main.c.o -c /home/agil/dev/Facool/PI/emprestimoDeSalas/src/main.c",
+  "file": "/home/agil/dev/Facool/PI/emprestimoDeSalas/src/main.c",
+  "output": "src/CMakeFiles/EmprestimoDeSalas_terminal.dir/main.c.o"
 }
 ]

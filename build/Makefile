@@ -174,6 +174,19 @@ EmprestimoDeSalas/fast:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas.dir/build.make src/CMakeFiles/EmprestimoDeSalas.dir/build
 .PHONY : EmprestimoDeSalas/fast
 
+#=============================================================================
+# Target rules for targets named EmprestimoDeSalas_terminal
+
+# Build rule for target.
+EmprestimoDeSalas_terminal: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 EmprestimoDeSalas_terminal
+.PHONY : EmprestimoDeSalas_terminal
+
+# fast build rule for target.
+EmprestimoDeSalas_terminal/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build.make src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build
+.PHONY : EmprestimoDeSalas_terminal/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -183,6 +196,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... EmprestimoDeSalas"
+	@echo "... EmprestimoDeSalas_terminal"
 	@echo "... limparTela"
 	@echo "... loginFuncs"
 	@echo "... reservasFuncs"

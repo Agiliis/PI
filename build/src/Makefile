@@ -136,6 +136,44 @@ EmprestimoDeSalas/fast:
 	cd /home/agil/dev/Facool/PI/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas.dir/build.make src/CMakeFiles/EmprestimoDeSalas.dir/build
 .PHONY : EmprestimoDeSalas/fast
 
+# Convenience name for target.
+src/CMakeFiles/EmprestimoDeSalas_terminal.dir/rule:
+	cd /home/agil/dev/Facool/PI/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/EmprestimoDeSalas_terminal.dir/rule
+.PHONY : src/CMakeFiles/EmprestimoDeSalas_terminal.dir/rule
+
+# Convenience name for target.
+EmprestimoDeSalas_terminal: src/CMakeFiles/EmprestimoDeSalas_terminal.dir/rule
+.PHONY : EmprestimoDeSalas_terminal
+
+# fast build rule for target.
+EmprestimoDeSalas_terminal/fast:
+	cd /home/agil/dev/Facool/PI/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build.make src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build
+.PHONY : EmprestimoDeSalas_terminal/fast
+
+main.o: main.c.o
+.PHONY : main.o
+
+# target to build an object file
+main.c.o:
+	cd /home/agil/dev/Facool/PI/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build.make src/CMakeFiles/EmprestimoDeSalas_terminal.dir/main.c.o
+.PHONY : main.c.o
+
+main.i: main.c.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.c.i:
+	cd /home/agil/dev/Facool/PI/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build.make src/CMakeFiles/EmprestimoDeSalas_terminal.dir/main.c.i
+.PHONY : main.c.i
+
+main.s: main.c.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.c.s:
+	cd /home/agil/dev/Facool/PI/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build.make src/CMakeFiles/EmprestimoDeSalas_terminal.dir/main.c.s
+.PHONY : main.c.s
+
 mainGUI.o: mainGUI.c.o
 .PHONY : mainGUI.o
 
@@ -169,6 +207,10 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... EmprestimoDeSalas"
+	@echo "... EmprestimoDeSalas_terminal"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... mainGUI.o"
 	@echo "... mainGUI.i"
 	@echo "... mainGUI.s"

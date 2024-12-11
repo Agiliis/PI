@@ -58,4 +58,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "include/CMakeFiles/loginFuncs.dir/DependInfo.cmake"
   "include/CMakeFiles/reservasFuncs.dir/DependInfo.cmake"
   "src/CMakeFiles/EmprestimoDeSalas.dir/DependInfo.cmake"
+  "src/CMakeFiles/EmprestimoDeSalas_terminal.dir/DependInfo.cmake"
   )

@@ -243,13 +243,7 @@ pkgcfg_lib_GTK_glib-2.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libglib-2.0.so
 pkgcfg_lib_GTK_gobject-2.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libgobject-2.0.so
 
 //Path to a library.
-pkgcfg_lib_GTK_graphene-1.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libgraphene-1.0.so
-
-//Path to a library.
 pkgcfg_lib_GTK_gtk-3:FILEPATH=/usr/lib/x86_64-linux-gnu/libgtk-3.so
-
-//Path to a library.
-pkgcfg_lib_GTK_gtk-4:FILEPATH=/usr/lib/x86_64-linux-gnu/libgtk-4.so
 
 //Path to a library.
 pkgcfg_lib_GTK_harfbuzz:FILEPATH=/usr/lib/x86_64-linux-gnu/libharfbuzz.so
@@ -259,9 +253,6 @@ pkgcfg_lib_GTK_pango-1.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libpango-1.0.so
 
 //Path to a library.
 pkgcfg_lib_GTK_pangocairo-1.0:FILEPATH=/usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so
-
-//Path to a library.
-pkgcfg_lib_GTK_vulkan:FILEPATH=/usr/lib/x86_64-linux-gnu/libvulkan.so
 
 //Path to a library.
 pkgcfg_lib_GTK_z:FILEPATH=/usr/lib/x86_64-linux-gnu/libz.so
@@ -437,10 +428,6 @@ GTK_gtk+-3.0_INCLUDEDIR:INTERNAL=
 GTK_gtk+-3.0_LIBDIR:INTERNAL=
 GTK_gtk+-3.0_PREFIX:INTERNAL=
 GTK_gtk+-3.0_VERSION:INTERNAL=
-GTK_gtk4_INCLUDEDIR:INTERNAL=
-GTK_gtk4_LIBDIR:INTERNAL=
-GTK_gtk4_PREFIX:INTERNAL=
-GTK_gtk4_VERSION:INTERNAL=
 //ADVANCED property for variable: PKG_CONFIG_ARGN
 PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
@@ -467,20 +454,14 @@ pkgcfg_lib_GTK_gio-2.0-ADVANCED:INTERNAL=1
 pkgcfg_lib_GTK_glib-2.0-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GTK_gobject-2.0
 pkgcfg_lib_GTK_gobject-2.0-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_GTK_graphene-1.0
-pkgcfg_lib_GTK_graphene-1.0-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GTK_gtk-3
 pkgcfg_lib_GTK_gtk-3-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_GTK_gtk-4
-pkgcfg_lib_GTK_gtk-4-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GTK_harfbuzz
 pkgcfg_lib_GTK_harfbuzz-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GTK_pango-1.0
 pkgcfg_lib_GTK_pango-1.0-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GTK_pangocairo-1.0
 pkgcfg_lib_GTK_pangocairo-1.0-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: pkgcfg_lib_GTK_vulkan
-pkgcfg_lib_GTK_vulkan-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_GTK_z
 pkgcfg_lib_GTK_z-ADVANCED:INTERNAL=1
 prefix_result:INTERNAL=/usr/lib/x86_64-linux-gnu

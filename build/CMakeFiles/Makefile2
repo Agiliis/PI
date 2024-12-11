@@ -112,10 +112,12 @@ include/clean: include/CMakeFiles/reservasFuncs.dir/clean
 
 # Recursive "all" directory target.
 src/all: src/CMakeFiles/EmprestimoDeSalas.dir/all
+src/all: src/CMakeFiles/EmprestimoDeSalas_terminal.dir/all
 .PHONY : src/all
 
 # Recursive "codegen" directory target.
 src/codegen: src/CMakeFiles/EmprestimoDeSalas.dir/codegen
+src/codegen: src/CMakeFiles/EmprestimoDeSalas_terminal.dir/codegen
 .PHONY : src/codegen
 
 # Recursive "preinstall" directory target.
@@ -124,6 +126,7 @@ src/preinstall:
 
 # Recursive "clean" directory target.
 src/clean: src/CMakeFiles/EmprestimoDeSalas.dir/clean
+src/clean: src/CMakeFiles/EmprestimoDeSalas_terminal.dir/clean
 .PHONY : src/clean
 
 #=============================================================================
@@ -133,7 +136,7 @@ src/clean: src/CMakeFiles/EmprestimoDeSalas.dir/clean
 include/CMakeFiles/limparTela.dir/all:
 	$(MAKE) $(MAKESILENT) -f include/CMakeFiles/limparTela.dir/build.make include/CMakeFiles/limparTela.dir/depend
 	$(MAKE) $(MAKESILENT) -f include/CMakeFiles/limparTela.dir/build.make include/CMakeFiles/limparTela.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/agil/dev/Facool/PI/build/CMakeFiles --progress-num=3,4 "Built target limparTela"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/agil/dev/Facool/PI/build/CMakeFiles --progress-num=5,6 "Built target limparTela"
 .PHONY : include/CMakeFiles/limparTela.dir/all
 
 # Build rule for subdir invocation for target.
@@ -164,7 +167,7 @@ include/CMakeFiles/limparTela.dir/clean:
 include/CMakeFiles/loginFuncs.dir/all: include/CMakeFiles/limparTela.dir/all
 	$(MAKE) $(MAKESILENT) -f include/CMakeFiles/loginFuncs.dir/build.make include/CMakeFiles/loginFuncs.dir/depend
 	$(MAKE) $(MAKESILENT) -f include/CMakeFiles/loginFuncs.dir/build.make include/CMakeFiles/loginFuncs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/agil/dev/Facool/PI/build/CMakeFiles --progress-num=5,6 "Built target loginFuncs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/agil/dev/Facool/PI/build/CMakeFiles --progress-num=7,8 "Built target loginFuncs"
 .PHONY : include/CMakeFiles/loginFuncs.dir/all
 
 # Build rule for subdir invocation for target.
@@ -195,7 +198,7 @@ include/CMakeFiles/loginFuncs.dir/clean:
 include/CMakeFiles/reservasFuncs.dir/all: include/CMakeFiles/limparTela.dir/all
 	$(MAKE) $(MAKESILENT) -f include/CMakeFiles/reservasFuncs.dir/build.make include/CMakeFiles/reservasFuncs.dir/depend
 	$(MAKE) $(MAKESILENT) -f include/CMakeFiles/reservasFuncs.dir/build.make include/CMakeFiles/reservasFuncs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/agil/dev/Facool/PI/build/CMakeFiles --progress-num=7,8 "Built target reservasFuncs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/agil/dev/Facool/PI/build/CMakeFiles --progress-num=9,10 "Built target reservasFuncs"
 .PHONY : include/CMakeFiles/reservasFuncs.dir/all
 
 # Build rule for subdir invocation for target.
@@ -251,6 +254,39 @@ src/CMakeFiles/EmprestimoDeSalas.dir/codegen:
 src/CMakeFiles/EmprestimoDeSalas.dir/clean:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas.dir/build.make src/CMakeFiles/EmprestimoDeSalas.dir/clean
 .PHONY : src/CMakeFiles/EmprestimoDeSalas.dir/clean
+
+#=============================================================================
+# Target rules for target src/CMakeFiles/EmprestimoDeSalas_terminal.dir
+
+# All Build rule for target.
+src/CMakeFiles/EmprestimoDeSalas_terminal.dir/all: include/CMakeFiles/limparTela.dir/all
+src/CMakeFiles/EmprestimoDeSalas_terminal.dir/all: include/CMakeFiles/loginFuncs.dir/all
+src/CMakeFiles/EmprestimoDeSalas_terminal.dir/all: include/CMakeFiles/reservasFuncs.dir/all
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build.make src/CMakeFiles/EmprestimoDeSalas_terminal.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build.make src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/agil/dev/Facool/PI/build/CMakeFiles --progress-num=3,4 "Built target EmprestimoDeSalas_terminal"
+.PHONY : src/CMakeFiles/EmprestimoDeSalas_terminal.dir/all
+
+# Build rule for subdir invocation for target.
+src/CMakeFiles/EmprestimoDeSalas_terminal.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/agil/dev/Facool/PI/build/CMakeFiles 8
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/EmprestimoDeSalas_terminal.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/agil/dev/Facool/PI/build/CMakeFiles 0
+.PHONY : src/CMakeFiles/EmprestimoDeSalas_terminal.dir/rule
+
+# Convenience name for target.
+EmprestimoDeSalas_terminal: src/CMakeFiles/EmprestimoDeSalas_terminal.dir/rule
+.PHONY : EmprestimoDeSalas_terminal
+
+# codegen rule for target.
+src/CMakeFiles/EmprestimoDeSalas_terminal.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build.make src/CMakeFiles/EmprestimoDeSalas_terminal.dir/codegen
+.PHONY : src/CMakeFiles/EmprestimoDeSalas_terminal.dir/codegen
+
+# clean rule for target.
+src/CMakeFiles/EmprestimoDeSalas_terminal.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/EmprestimoDeSalas_terminal.dir/build.make src/CMakeFiles/EmprestimoDeSalas_terminal.dir/clean
+.PHONY : src/CMakeFiles/EmprestimoDeSalas_terminal.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

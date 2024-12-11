@@ -10,3 +10,15 @@ target_link_libraries(${PROJECT_NAME} PRIVATE loginFuncs)
 target_link_libraries(${PROJECT_NAME} PRIVATE reservasFuncs)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE DBG=1)
+
+set(PROJECT_NAME_TERM "${PROJECT_NAME}_terminal")
+
+add_executable(${PROJECT_NAME_TERM}
+   main.c
+   dbg.h)
+
+target_link_libraries(${PROJECT_NAME_TERM} PRIVATE limparTela)
+target_link_libraries(${PROJECT_NAME_TERM} PRIVATE loginFuncs)
+target_link_libraries(${PROJECT_NAME_TERM} PRIVATE reservasFuncs)
+
+target_compile_definitions(${PROJECT_NAME_TERM} PRIVATE DBG=0)

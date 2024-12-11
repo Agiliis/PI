@@ -31,9 +31,9 @@
 					"source" : "include",
 					"targetIndexes" : 
 					[
-						1,
 						2,
-						3
+						3,
+						4
 					]
 				},
 				{
@@ -48,7 +48,8 @@
 					"source" : "src",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -68,7 +69,8 @@
 						0,
 						1,
 						2,
-						3
+						3,
+						4
 					]
 				}
 			],
@@ -79,6 +81,13 @@
 					"id" : "EmprestimoDeSalas::@145eef247bfb46b6828c",
 					"jsonFile" : "target-EmprestimoDeSalas-Debug-0c4a403c77a76d2ae5b0.json",
 					"name" : "EmprestimoDeSalas",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "EmprestimoDeSalas_terminal::@145eef247bfb46b6828c",
+					"jsonFile" : "target-EmprestimoDeSalas_terminal-Debug-2633ac91bde147525bbb.json",
+					"name" : "EmprestimoDeSalas_terminal",
 					"projectIndex" : 0
 				},
 				{

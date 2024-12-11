@@ -1558,54 +1558,6 @@
 			"value" : ""
 		},
 		{
-			"name" : "GTK_gtk4_INCLUDEDIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "GTK_gtk4_LIBDIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "GTK_gtk4_PREFIX",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "GTK_gtk4_VERSION",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : ""
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
 			"name" : "PKG_CONFIG_ARGN",
 			"properties" : 
 			[
@@ -1814,22 +1766,6 @@
 			"value" : "/usr/lib/x86_64-linux-gnu/libgobject-2.0.so"
 		},
 		{
-			"name" : "pkgcfg_lib_GTK_graphene-1.0",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a library."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "/usr/lib/x86_64-linux-gnu/libgraphene-1.0.so"
-		},
-		{
 			"name" : "pkgcfg_lib_GTK_gtk-3",
 			"properties" : 
 			[
@@ -1844,22 +1780,6 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "/usr/lib/x86_64-linux-gnu/libgtk-3.so"
-		},
-		{
-			"name" : "pkgcfg_lib_GTK_gtk-4",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a library."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "/usr/lib/x86_64-linux-gnu/libgtk-4.so"
 		},
 		{
 			"name" : "pkgcfg_lib_GTK_harfbuzz",
@@ -1908,22 +1828,6 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "/usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so"
-		},
-		{
-			"name" : "pkgcfg_lib_GTK_vulkan",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a library."
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "/usr/lib/x86_64-linux-gnu/libvulkan.so"
 		},
 		{
 			"name" : "pkgcfg_lib_GTK_z",

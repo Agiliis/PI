@@ -1,0 +1,1 @@
+/usr/bin/cc -g -Wl,--dependency-file,CMakeFiles/EmprestimoDeSalas_terminal.dir/link.d CMakeFiles/EmprestimoDeSalas_terminal.dir/main.c.o -o EmprestimoDeSalas_terminal  ../include/liblimparTela.a ../include/libloginFuncs.a ../include/libreservasFuncs.a ../include/liblimparTela.a
